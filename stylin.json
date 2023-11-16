@@ -1,0 +1,26 @@
+{
+  // Spans
+  code: "Custom Code Style Name",
+  emphasis: "Custom Emphasis Style Name",
+  strong: "Custom Strong Style Name",
+  strong_emphasis: "Custom Strong Emphasis Style Name",
+  strong_code: "Custom Strong Code Style Name",
+
+  // Blocks
+  heading_1: "Custom Heading Level 1 Style Name",
+  heading_2: "Custom Heading Level 2 Style Name",
+  heading_3: "Custom Heading Level 3 Style Name",
+  heading_4: "Custom Heading Level 4 Style Name",
+  heading_5: "Custom Heading Level 5 Style Name",
+  heading_6: "Custom Heading Level 6 Style Name",
+  paragraph: "Custom Paragraph Style Name",
+  ordered_list: "Custom Ordered List Style Name",
+  unordered_list: "Custom Unordered List Style Name",
+  table: "Custom Table Style Name",
+  blockquote: "Custom Blockquote Style Name",
+  fenced_code_block: "Custom Fenced Code Block Style Name",
+  indented_code_block: "Custom Indented Code Block Style Name",
+
+  // Other
+  convert_smart_quotes: false,
+}
