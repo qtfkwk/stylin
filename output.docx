@@ -67,13 +67,25 @@ backtick</span>.</p>
 </div>
 <div data-custom-style="Custom Paragraph Style Name">
 <p>Paragraph with <span
-data-custom-style="Custom Emphasis Style Name">emphasis text</span>,
-<span data-custom-style="Custom Strong Style Name">strong text</span>,
-<span data-custom-style="Custom Strong Emphasis Style Name">strong
-emphasis text</span>, and <span
-data-custom-style="Custom Strong Style Name"><span
-data-custom-style="Custom Code Style Name">strong code
-text</span></span>.</p>
+data-custom-style="Custom Emphasis Style Name">emphasis text 1</span>,
+<span data-custom-style="Custom Emphasis Style Name">emphasis text
+2</span>, <span data-custom-style="Custom Strong Style Name">strong text
+1</span>, <span data-custom-style="Custom Strong Style Name">strong text
+2</span>, <span
+data-custom-style="Custom Strong Emphasis Style Name">emphasis strong
+text 1</span>, <span
+data-custom-style="Custom Strong Emphasis Style Name">emphasis strong
+text 2</span>, <span
+data-custom-style="Custom Strong Emphasis Style Name">emphasis strong
+text 3</span>, <span
+data-custom-style="Custom Strong Emphasis Style Name">emphasis strong
+text 4</span>, <span
+data-custom-style="Custom Strong Emphasis Style Name">strong emphasis
+text 1</span>, <span
+data-custom-style="Custom Strong Emphasis Style Name">strong emphasis
+text 2</span>, and <span
+data-custom-style="Custom Strong Code Style Name">strong code
+text</span>.</p>
 </div>
 <div data-custom-style="Custom Heading Level 4 Style Name">
 <p>Heading level 4</p>

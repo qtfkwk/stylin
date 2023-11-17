@@ -29,9 +29,16 @@ A | B
 ### Heading level 3
 
 Paragraph with
-*emphasis text*,
-**strong text**,
-***strong emphasis text***, and
+*emphasis text 1*,
+_emphasis text 2_,
+**strong text 1**,
+__strong text 2__,
+***emphasis strong text 1***,
+___emphasis strong text 2___,
+_**emphasis strong text 3**_,
+*__emphasis strong text 4__*,
+**_strong emphasis text 1_**,
+__*strong emphasis text 2*__, and
 **`strong code text`**.
 
 #### Heading level 4

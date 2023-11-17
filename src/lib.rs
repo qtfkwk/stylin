@@ -1,3 +1,37 @@
+/*!
+
+```
+use stylin::Stylin;
+
+let s = Stylin::from(r#"{
+    heading_1: "Heading Level 1 Style",
+    paragraph: "Paragraph Style",
+}"#).expect("config");
+
+let input = String::from(
+    "# This is a heading\n\nThis is a paragraph.\n\n",
+);
+
+let output = s.convert(&input).expect("convert");
+
+assert_eq!(
+  output.join(""),
+  r#":::{custom-style="Heading Level 1 Style"}
+This is a heading
+:::
+
+:::{custom-style="Paragraph Style"}
+This is a paragraph.
+:::
+
+"#,
+);
+```
+
+*/
+
+//--------------------------------------------------------------------------------------------------
+
 use anyhow::Result;
 use pulldown_cmark as pd;
 use serde::Deserialize;
@@ -6,12 +40,20 @@ use std::path::Path;
 
 //--------------------------------------------------------------------------------------------------
 
+/**
+
+Primary interface
+
+See the module level documentation for an example.
+
+*/
 #[derive(Debug, Default, Deserialize)]
 pub struct Stylin {
     // Spans
     code: Option<String>,
     emphasis: Option<String>,
     strong: Option<String>,
+    emphasis_strong: Option<String>,
     strong_emphasis: Option<String>,
     strong_code: Option<String>,
 
@@ -376,13 +418,13 @@ impl Stylin {
 
     */
     fn process_block(&self, mut block: String, blocks: &mut Vec<String>) -> String {
-        resolve_double_style(
-            &self.strong,
-            &self.emphasis,
-            &self.strong_emphasis,
-            &mut block,
-        );
-        resolve_double_style(&self.strong, &self.code, &self.strong_code, &mut block);
+        for (outer, inner, double) in [
+            (&self.emphasis, &self.strong, &self.emphasis_strong),
+            (&self.strong, &self.emphasis, &self.strong_emphasis),
+            (&self.strong, &self.code, &self.strong_code),
+        ] {
+            resolve_double_style(outer, inner, double, &mut block);
+        }
         blocks.push(block);
         String::new()
     }
@@ -392,35 +434,36 @@ impl Stylin {
 
 /**
 
-Replace "double styled" spans with a single style
+Replace "double style" spans with a single style
 
 */
 fn resolve_double_style(
-    a: &Option<String>,
-    b: &Option<String>,
-    c: &Option<String>,
+    outer: &Option<String>,
+    inner: &Option<String>,
+    double: &Option<String>,
     block: &mut String,
 ) {
-    if let Some(style_a) = a {
-        if let Some(style_b) = b {
-            if let Some(style_c) = c {
+    if let Some(style_outer) = outer {
+        if let Some(style_inner) = inner {
+            if let Some(style_double) = double {
                 // All three styles must be defined...
 
-                let from =
-                    format!("]{{custom-style=\"{style_a}\"}}]{{custom-style=\"{style_b}\"}}");
-                let to = format!("]{{custom-style=\"{style_c}\"}}");
+                let replace = format!(
+                    "]{{custom-style=\"{style_inner}\"}}]{{custom-style=\"{style_outer}\"}}"
+                );
+                let with = format!("]{{custom-style=\"{style_double}\"}}");
+                let loss = replace.len() - with.len() + 1;
 
                 let mut i = 0;
-                while let Some(mut c) = block[i..].find(&from) {
+                while let Some(mut c) = block[i..].find(&replace) {
                     c += i;
-                    c -= 1; // this is due to the removal of one of the `[`
-                    let d = c + from.len();
+                    let d = c + replace.len();
                     if let Some(a) = block[..c].rfind("[[") {
                         let b = a + 2;
+                        block.replace_range(c..d, &with);
                         block.replace_range(a..b, "[");
-                        block.replace_range(c..d, &to);
                     }
-                    i = d;
+                    i = d - loss;
                 }
             }
         }

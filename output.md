@@ -51,10 +51,17 @@ Heading level 3
 
 :::{custom-style="Custom Paragraph Style Name"}
 Paragraph with
-[emphasis text]{custom-style="Custom Emphasis Style Name"},
-[strong text]{custom-style="Custom Strong Style Name"},
-[strong emphasis text]{custom-style="Custom Strong Emphasis Style Name"}, and
-[[strong code text]{custom-style="Custom Code Style Name"}]{custom-style="Custom Strong Style Name"}.
+[emphasis text 1]{custom-style="Custom Emphasis Style Name"},
+[emphasis text 2]{custom-style="Custom Emphasis Style Name"},
+[strong text 1]{custom-style="Custom Strong Style Name"},
+[strong text 2]{custom-style="Custom Strong Style Name"},
+[emphasis strong text 1]{custom-style="Custom Emphasis Strong Style Name"},
+[emphasis strong text 2]{custom-style="Custom Emphasis Strong Style Name"},
+[emphasis strong text 3]{custom-style="Custom Emphasis Strong Style Name"},
+[emphasis strong text 4]{custom-style="Custom Emphasis Strong Style Name"},
+[strong emphasis text 1]{custom-style="Custom Strong Emphasis Style Name"},
+[strong emphasis text 2]{custom-style="Custom Strong Emphasis Style Name"}, and
+[strong code text]{custom-style="Custom Strong Code Style Name"}.
 :::
 
 :::{custom-style="Custom Heading Level 4 Style Name"}

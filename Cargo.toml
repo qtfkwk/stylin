@@ -1,6 +1,6 @@
 [package]
 name = "stylin"
-version = "0.1.1"
+version = "0.2.0"
 edition = "2021"
 description = "Convert markdown to pandoc markdown with custom styles"
 repository = "https://github.com/qtfkwk/stylin"

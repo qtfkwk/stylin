@@ -2,7 +2,11 @@
 
 Convert markdown to pandoc markdown with custom styles
 
-# Usage
+Stylin provides a [library](#library) and a [command line utility](#cli).
+
+# CLI
+
+## Usage
 
 ```text
 $ stylin -h
@@ -22,10 +26,10 @@ Options:
 
 ```text
 $ stylin -V
-stylin 0.1.1
+stylin 0.2.0
 ```
 
-# Example
+## Example
 
 Given a configuration file, [`stylin.json`](stylin.json):
 
@@ -35,6 +39,7 @@ Given a configuration file, [`stylin.json`](stylin.json):
   code: "Custom Code Style Name",
   emphasis: "Custom Emphasis Style Name",
   strong: "Custom Strong Style Name",
+  emphasis_strong: "Custom Emphasis Strong Style Name",
   strong_emphasis: "Custom Strong Emphasis Style Name",
   strong_code: "Custom Strong Code Style Name",
 
@@ -92,9 +97,16 @@ A | B
 ### Heading level 3
 
 Paragraph with
-*emphasis text*,
-**strong text**,
-***strong emphasis text***, and
+*emphasis text 1*,
+_emphasis text 2_,
+**strong text 1**,
+__strong text 2__,
+***emphasis strong text 1***,
+___emphasis strong text 2___,
+_**emphasis strong text 3**_,
+*__emphasis strong text 4__*,
+**_strong emphasis text 1_**,
+__*strong emphasis text 2*__, and
 **`strong code text`**.
 
 #### Heading level 4
@@ -127,7 +139,7 @@ stylin input.md >output.md
 
 To produce the output file, [`output.md`](output.md):
 
-~~~md
+~~~text
 :::{custom-style="Custom Heading Level 1 Style Name"}
 Heading level 1
 :::
@@ -181,10 +193,17 @@ Heading level 3
 
 :::{custom-style="Custom Paragraph Style Name"}
 Paragraph with
-[emphasis text]{custom-style="Custom Emphasis Style Name"},
-[strong text]{custom-style="Custom Strong Style Name"},
-[strong emphasis text]{custom-style="Custom Strong Emphasis Style Name"}, and
-[[strong code text]{custom-style="Custom Code Style Name"}]{custom-style="Custom Strong Style Name"}.
+[emphasis text 1]{custom-style="Custom Emphasis Style Name"},
+[emphasis text 2]{custom-style="Custom Emphasis Style Name"},
+[strong text 1]{custom-style="Custom Strong Style Name"},
+[strong text 2]{custom-style="Custom Strong Style Name"},
+[emphasis strong text 1]{custom-style="Custom Emphasis Strong Style Name"},
+[emphasis strong text 2]{custom-style="Custom Emphasis Strong Style Name"},
+[emphasis strong text 3]{custom-style="Custom Emphasis Strong Style Name"},
+[emphasis strong text 4]{custom-style="Custom Emphasis Strong Style Name"},
+[strong emphasis text 1]{custom-style="Custom Strong Emphasis Style Name"},
+[strong emphasis text 2]{custom-style="Custom Strong Emphasis Style Name"}, and
+[strong code text]{custom-style="Custom Strong Code Style Name"}.
 :::
 
 :::{custom-style="Custom Heading Level 4 Style Name"}
@@ -223,11 +242,18 @@ Heading level 6
 
 ~~~
 
+# Library
+
+See the [documentation](https://docs.rs/stylin) for usage and an example.
+
 # Changelog
 
-* 0.1.0 (2023-11-16) Initial release
-* 0.1.1 (2023-11-16) Remove null configuration file; fix bad json syntax
+* 0.1.0 (2023-11-16): Initial release
+* 0.1.1 (2023-11-16): Remove null configuration file; fix bad json syntax
   highlighting on readme
+* 0.2.0 (2023-11-17): Add doctest; add `emphasis_strong` double style; add
+  more strong/emphasis examples to `input.md`; fix issue with strong code double
+  style; improve the double style algorithm; fix changelog; improve readme
 
 # Notes
 
@@ -241,6 +267,6 @@ Heading level 6
 3. Table style works but is broken in pandoc versions greater than 2.7.1 (see
    [jgm/pandoc#6496](https://github.com/jgm/pandoc/issues/6496)).
 
-4. So-called "double styles" (`strong_emphasis`, `strong_code`) each require the
-   two base styles also be defined.
+4. So-called "double styles" (`emphasis_strong`, `strong_emphasis`, and
+   `strong_code`) each require the base styles also be defined.
 

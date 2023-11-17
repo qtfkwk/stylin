@@ -2,7 +2,11 @@
 
 Convert markdown to pandoc markdown with custom styles
 
-# Usage
+Stylin provides a [library](#library) and a [command line utility](#cli).
+
+# CLI
+
+## Usage
 
 ```text
 $ stylin -h
@@ -14,7 +18,7 @@ $ stylin -V
 !run:../target/release/stylin -V
 ```
 
-# Example
+## Example
 
 Given a configuration file, [`stylin.json`](stylin.json):
 
@@ -38,9 +42,13 @@ stylin input.md >output.md
 
 To produce the output file, [`output.md`](output.md):
 
-~~~md
+~~~text
 !inc:../output.md
 ~~~
+
+# Library
+
+See the [documentation](https://docs.rs/stylin) for usage and an example.
 
 !inc:../CHANGELOG.md
 
@@ -56,6 +64,6 @@ To produce the output file, [`output.md`](output.md):
 3. Table style works but is broken in pandoc versions greater than 2.7.1 (see
    [jgm/pandoc#6496](https://github.com/jgm/pandoc/issues/6496)).
 
-4. So-called "double styles" (`strong_emphasis`, `strong_code`) each require the
-   two base styles also be defined.
+4. So-called "double styles" (`emphasis_strong`, `strong_emphasis`, and
+   `strong_code`) each require the base styles also be defined.
 

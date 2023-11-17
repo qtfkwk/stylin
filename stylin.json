@@ -3,6 +3,7 @@
   code: "Custom Code Style Name",
   emphasis: "Custom Emphasis Style Name",
   strong: "Custom Strong Style Name",
+  emphasis_strong: "Custom Emphasis Strong Style Name",
   strong_emphasis: "Custom Strong Emphasis Style Name",
   strong_code: "Custom Strong Code Style Name",
 
