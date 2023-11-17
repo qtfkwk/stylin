@@ -6,4 +6,6 @@
 * 0.2.0 (2023-11-17): Add doctest; add `emphasis_strong` double style; add
   more strong/emphasis examples to `input.md`; fix issue with strong code double
   style; improve the double style algorithm; fix changelog; improve readme
+* 0.3.0 (2023-11-17): Avoid adding block style if it already has a style; add
+  images; remove convert smart quotes feature
 

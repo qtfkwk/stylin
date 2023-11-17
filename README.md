@@ -26,7 +26,7 @@ Options:
 
 ```text
 $ stylin -V
-stylin 0.2.0
+stylin 0.3.0
 ```
 
 ## Example
@@ -57,9 +57,6 @@ Given a configuration file, [`stylin.json`](stylin.json):
   blockquote: "Custom Blockquote Style Name",
   fenced_code_block: "Custom Fenced Code Block Style Name",
   indented_code_block: "Custom Indented Code Block Style Name",
-
-  // Other
-  convert_smart_quotes: false,
 }
 ~~~
 
@@ -128,6 +125,20 @@ __*strong emphasis text 2*__, and
 2: 
 3: Blah
 ```
+
+:::{custom-style="Some Other Custom Style"}
+This paragraph already has a block style.
+:::
+
+:::{custom-style="Some Other Custom Style"}
+* Alpha
+
+* Bravo
+
+* Charlie
+:::
+
+![](path/to/image.png)
 
 ~~~
 
@@ -240,6 +251,22 @@ Heading level 6
 3: Blah
 :::
 
+:::{custom-style="Some Other Custom Style"}
+This paragraph already has a block style.
+:::
+
+:::{custom-style="Some Other Custom Style"}
+* Alpha
+
+* Bravo
+
+* Charlie
+:::
+
+:::{custom-style="Custom Paragraph Style Name"}
+![](path/to/image.png)
+:::
+
 ~~~
 
 # Library
@@ -254,6 +281,8 @@ See the [documentation](https://docs.rs/stylin) for usage and an example.
 * 0.2.0 (2023-11-17): Add doctest; add `emphasis_strong` double style; add
   more strong/emphasis examples to `input.md`; fix issue with strong code double
   style; improve the double style algorithm; fix changelog; improve readme
+* 0.3.0 (2023-11-17): Avoid adding block style if it already has a style; add
+  images; remove convert smart quotes feature
 
 # Notes
 

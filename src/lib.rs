@@ -73,11 +73,11 @@ pub struct Stylin {
     table: Option<String>,
 
     // Other
-    #[serde(default = "default_config_convert_smart_quotes")]
-    convert_smart_quotes: bool,
+    #[serde(default = "default_debug")]
+    debug: bool,
 }
 
-fn default_config_convert_smart_quotes() -> bool {
+fn default_debug() -> bool {
     false
 }
 
@@ -107,7 +107,7 @@ impl Stylin {
 
     */
     pub fn convert(&self, input: &str) -> Result<Vec<String>> {
-        let mut blocks = vec![];
+        let mut blocks: Vec<String> = vec![];
 
         // State
         let mut depth = 0;
@@ -117,9 +117,18 @@ impl Stylin {
         let mut indents = vec![];
         let mut disabled = false;
         let mut block = String::new();
+        let mut paragraph = None;
 
         for (event, range) in pd::Parser::new_ext(input, pd::Options::all()).into_offset_iter() {
             let source = &input[range.clone()];
+
+            if self.debug {
+                eprintln!("---");
+                eprintln!("range = {range:?}");
+                eprintln!("source = {source:?}");
+                eprintln!("event = {event:?}");
+                eprintln!("lists = {lists:?}");
+            }
 
             match event {
                 pd::Event::Start(tag) => match tag {
@@ -182,7 +191,7 @@ impl Stylin {
                                 first_li_p = false;
                             } else if depth == 0 {
                                 if let Some(style) = &self.paragraph {
-                                    writeln!(block, ":::{{custom-style=\"{style}\"}}")?;
+                                    paragraph = Some((style, false));
                                 }
                             }
                         }
@@ -194,15 +203,16 @@ impl Stylin {
                                 if let Some(style) = &self.ordered_list {
                                     writeln!(block, ":::{{custom-style=\"{style}\"}}")?;
                                 }
-                                indents.push("   ");
-                            } else {
-                                if let Some(style) = &self.unordered_list {
-                                    writeln!(block, ":::{{custom-style=\"{style}\"}}")?;
-                                }
-                                indents.push("  ");
+                            } else if let Some(style) = &self.unordered_list {
+                                writeln!(block, ":::{{custom-style=\"{style}\"}}")?;
                             }
                         }
+                        if paragraph.is_some() {
+                            let prev_block = blocks.pop().unwrap();
+                            block = prev_block.strip_suffix(":::\n\n").unwrap().to_string();
+                        }
                         lists.push(t);
+                        indents.push(" ".repeat(if t.is_some() { 3 } else { 2 }));
                         first_li = true;
                         first_li_p = true;
                         depth += 1;
@@ -232,7 +242,14 @@ impl Stylin {
                 pd::Event::Code(s) => {
                     if !disabled {
                         let mut done = false;
-                        if let Some(style) = &self.code {
+                        if let Some((style, printed)) = paragraph {
+                            if printed {
+                                write!(block, "{source}")?;
+                            } else {
+                                writeln!(block, ":::{{custom-style=\"{style}\"}}")?;
+                                paragraph = Some((style, true));
+                            }
+                        } else if let Some(style) = &self.code {
                             write!(block, "[{s}]{{custom-style=\"{style}\"}}")?;
                             done = true;
                         }
@@ -241,10 +258,23 @@ impl Stylin {
                         }
                     }
                 }
-                pd::Event::Text(s) => {
+                pd::Event::Text(_s) => {
                     if !disabled {
-                        if self.convert_smart_quotes {
-                            write!(block, "{s}")?;
+                        if let Some((style, printed)) = paragraph {
+                            if printed {
+                                write!(block, "{source}")?;
+                                if block.ends_with(":::") {
+                                    paragraph = None;
+                                }
+                            } else {
+                                if source.starts_with(":::") {
+                                    paragraph = Some((style, true));
+                                } else {
+                                    writeln!(block, ":::{{custom-style=\"{style}\"}}")?;
+                                    paragraph = None;
+                                }
+                                write!(block, "{source}")?;
+                            }
                         } else {
                             write!(block, "{source}")?;
                         }
@@ -269,6 +299,13 @@ impl Stylin {
                         } else {
                             write!(block, "**")?;
                         }
+                    }
+                    pd::Tag::Image(..) => {
+                        if let Some((style, false)) = paragraph {
+                            writeln!(block, ":::{{custom-style=\"{style}\"}}")?;
+                            paragraph = Some((style, true));
+                        }
+                        write!(block, "{source}")?;
                     }
 
                     // Blocks
@@ -295,7 +332,7 @@ impl Stylin {
                     pd::Tag::Paragraph => {
                         depth -= 1;
                         if !disabled && lists.is_empty() && depth == 0 {
-                            if self.paragraph.is_some() {
+                            if self.paragraph.is_some() && !block.ends_with(":::") {
                                 writeln!(block, "\n:::\n")?;
                             } else {
                                 writeln!(block, "\n")?;
@@ -307,12 +344,12 @@ impl Stylin {
                         depth -= 1;
                         if depth == 0 {
                             if t.is_some() {
-                                if self.ordered_list.is_some() {
+                                if self.ordered_list.is_some() && !block.ends_with(":::\n") {
                                     writeln!(block, ":::\n")?;
                                 } else {
                                     writeln!(block)?;
                                 }
-                            } else if self.unordered_list.is_some() {
+                            } else if self.unordered_list.is_some() && !block.ends_with(":::\n") {
                                 writeln!(block, ":::\n")?;
                             } else {
                                 writeln!(block)?;
@@ -424,6 +461,9 @@ impl Stylin {
             (&self.strong, &self.code, &self.strong_code),
         ] {
             resolve_double_style(outer, inner, double, &mut block);
+        }
+        if self.debug {
+            eprintln!("---\nblock = {block:?}");
         }
         blocks.push(block);
         String::new()

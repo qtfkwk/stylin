@@ -98,3 +98,19 @@ Heading level 6
 3: Blah
 :::
 
+:::{custom-style="Some Other Custom Style"}
+This paragraph already has a block style.
+:::
+
+:::{custom-style="Some Other Custom Style"}
+* Alpha
+
+* Bravo
+
+* Charlie
+:::
+
+:::{custom-style="Custom Paragraph Style Name"}
+![](path/to/image.png)
+:::
+

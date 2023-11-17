@@ -72,13 +72,13 @@ data-custom-style="Custom Emphasis Style Name">emphasis text 1</span>,
 2</span>, <span data-custom-style="Custom Strong Style Name">strong text
 1</span>, <span data-custom-style="Custom Strong Style Name">strong text
 2</span>, <span
-data-custom-style="Custom Strong Emphasis Style Name">emphasis strong
+data-custom-style="Custom Emphasis Strong Style Name">emphasis strong
 text 1</span>, <span
-data-custom-style="Custom Strong Emphasis Style Name">emphasis strong
+data-custom-style="Custom Emphasis Strong Style Name">emphasis strong
 text 2</span>, <span
-data-custom-style="Custom Strong Emphasis Style Name">emphasis strong
+data-custom-style="Custom Emphasis Strong Style Name">emphasis strong
 text 3</span>, <span
-data-custom-style="Custom Strong Emphasis Style Name">emphasis strong
+data-custom-style="Custom Emphasis Strong Style Name">emphasis strong
 text 4</span>, <span
 data-custom-style="Custom Strong Emphasis Style Name">strong emphasis
 text 1</span>, <span
@@ -111,4 +111,17 @@ text</span>.</p>
 <p>1: Fenced code block</p>
 <p>2:</p>
 <p>3: Blah</p>
+</div>
+<div data-custom-style="Some Other Custom Style">
+<p>This paragraph already has a block style.</p>
+</div>
+<div data-custom-style="Some Other Custom Style">
+<ul>
+<li><p>Alpha</p></li>
+<li><p>Bravo</p></li>
+<li><p>Charlie</p></li>
+</ul>
+</div>
+<div data-custom-style="Custom Paragraph Style Name">
+<p><img src="path/to/image.png" /></p>
 </div>

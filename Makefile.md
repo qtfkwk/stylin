@@ -3,6 +3,7 @@
 * clippy
 * `README.md`
 * `output.docx`
+* test
 
 ```
 cargo build --release
@@ -18,7 +19,7 @@ cargo build --release
 
 ```
 cargo build --release
-kapow {0} >{target}
+kapow -R {0} >{target}
 ```
 
 # clippy

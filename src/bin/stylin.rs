@@ -6,6 +6,10 @@ use stylin::Stylin;
 #[derive(Parser)]
 #[command(about, version, arg_required_else_help = true)]
 struct Cli {
+    /// Debug
+    #[arg(short, hide = true)]
+    debug: bool,
+
     /// Configuration file
     #[arg(short, value_name = "PATH", default_value = "stylin.json")]
     config: PathBuf,
@@ -32,8 +36,13 @@ fn main() -> Result<()> {
         } else {
             std::fs::read_to_string(input_file)?
         };
-        for block in s.convert(&input)? {
-            print!("{block}");
+        let blocks = s.convert(&input)?;
+        if cli.debug {
+            println!("{blocks:#?}");
+        } else {
+            for block in blocks {
+                print!("{block}");
+            }
         }
     }
     Ok(())

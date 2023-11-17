@@ -61,3 +61,17 @@ __*strong emphasis text 2*__, and
 3: Blah
 ```
 
+:::{custom-style="Some Other Custom Style"}
+This paragraph already has a block style.
+:::
+
+:::{custom-style="Some Other Custom Style"}
+* Alpha
+
+* Bravo
+
+* Charlie
+:::
+
+![](path/to/image.png)
+
