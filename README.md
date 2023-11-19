@@ -26,7 +26,7 @@ Options:
 
 ```text
 $ stylin -V
-stylin 0.3.0
+stylin 0.4.0
 ```
 
 ## Example
@@ -138,7 +138,35 @@ This paragraph already has a block style.
 * Charlie
 :::
 
-![](path/to/image.png)
+![](path)
+
+![alt](path)
+
+![](path "title")
+
+![alt](path "title")
+
+[text](url)
+
+[text](url "title")
+
+[![](path)](url)
+
+[![alt](path)](url)
+
+[![](path "title")](url)
+
+[![alt](path "title")](url)
+
+[![](path)](url "title")
+
+[![alt](path)](url "title")
+
+[![](path "title")](url "title")
+
+[![alt](path "title")](url "title")
+
+Alpha [![alt](path "title")](url "title") bravo.
 
 ~~~
 
@@ -264,7 +292,63 @@ This paragraph already has a block style.
 :::
 
 :::{custom-style="Custom Paragraph Style Name"}
-![](path/to/image.png)
+![](path)
+:::
+
+:::{custom-style="Custom Paragraph Style Name"}
+![alt](path)
+:::
+
+:::{custom-style="Custom Paragraph Style Name"}
+![](path "title")
+:::
+
+:::{custom-style="Custom Paragraph Style Name"}
+![alt](path "title")
+:::
+
+:::{custom-style="Custom Paragraph Style Name"}
+[text](url)
+:::
+
+:::{custom-style="Custom Paragraph Style Name"}
+[text](url "title")
+:::
+
+:::{custom-style="Custom Paragraph Style Name"}
+[![](path)](url)
+:::
+
+:::{custom-style="Custom Paragraph Style Name"}
+[![alt](path)](url)
+:::
+
+:::{custom-style="Custom Paragraph Style Name"}
+[![](path "title")](url)
+:::
+
+:::{custom-style="Custom Paragraph Style Name"}
+[![alt](path "title")](url)
+:::
+
+:::{custom-style="Custom Paragraph Style Name"}
+[![](path)](url "title")
+:::
+
+:::{custom-style="Custom Paragraph Style Name"}
+[![alt](path)](url "title")
+:::
+
+:::{custom-style="Custom Paragraph Style Name"}
+[![](path "title")](url "title")
+:::
+
+:::{custom-style="Custom Paragraph Style Name"}
+[![alt](path "title")](url "title")
+:::
+
+:::{custom-style="Custom Paragraph Style Name"}
+Alpha [![alt](path "title")](url "title") bravo.
 :::
 
 ~~~
@@ -283,6 +367,8 @@ See the [documentation](https://docs.rs/stylin) for usage and an example.
   style; improve the double style algorithm; fix changelog; improve readme
 * 0.3.0 (2023-11-17): Avoid adding block style if it already has a style; add
   images; remove convert smart quotes feature
+* 0.4.0 (2023-11-18): Fix image alt text; add links; fix comments; add unit
+  tests
 
 # Notes
 
