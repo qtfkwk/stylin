@@ -73,5 +73,33 @@ This paragraph already has a block style.
 * Charlie
 :::
 
-![](path/to/image.png)
+![](path)
+
+![alt](path)
+
+![](path "title")
+
+![alt](path "title")
+
+[text](url)
+
+[text](url "title")
+
+[![](path)](url)
+
+[![alt](path)](url)
+
+[![](path "title")](url)
+
+[![alt](path "title")](url)
+
+[![](path)](url "title")
+
+[![alt](path)](url "title")
+
+[![](path "title")](url "title")
+
+[![alt](path "title")](url "title")
+
+Alpha [![alt](path "title")](url "title") bravo.
 

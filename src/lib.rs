@@ -40,6 +40,11 @@ use std::path::Path;
 
 //--------------------------------------------------------------------------------------------------
 
+#[cfg(test)]
+mod tests;
+
+//--------------------------------------------------------------------------------------------------
+
 /**
 
 Primary interface
@@ -131,7 +136,9 @@ impl Stylin {
             }
 
             match event {
+                // Start tags
                 pd::Event::Start(tag) => match tag {
+                    // Spans
                     pd::Tag::Emphasis => {
                         if self.emphasis.is_some() {
                             write!(block, "[")?;
@@ -146,6 +153,12 @@ impl Stylin {
                             write!(block, "**")?;
                         }
                     }
+                    pd::Tag::Image(..) | pd::Tag::Link(..) => {
+                        disabled = true;
+                        depth += 1;
+                    }
+
+                    // Blocks
                     pd::Tag::Heading(level, ..) => {
                         let mut done = false;
                         if depth == 0 {
@@ -239,6 +252,8 @@ impl Stylin {
                     }
                     _ => {} // end tags
                 }, // end start
+
+                // Other events
                 pd::Event::Code(s) => {
                     if !disabled {
                         let mut done = false;
@@ -285,7 +300,10 @@ impl Stylin {
                         writeln!(block, "---\n")?;
                     }
                 }
+
+                // End tags
                 pd::Event::End(tag) => match tag {
+                    // Spans
                     pd::Tag::Emphasis => {
                         if let Some(style) = &self.emphasis {
                             write!(block, "]{{custom-style=\"{style}\"}}")?;
@@ -300,12 +318,16 @@ impl Stylin {
                             write!(block, "**")?;
                         }
                     }
-                    pd::Tag::Image(..) => {
+                    pd::Tag::Image(..) | pd::Tag::Link(..) => {
                         if let Some((style, false)) = paragraph {
                             writeln!(block, ":::{{custom-style=\"{style}\"}}")?;
                             paragraph = Some((style, true));
                         }
-                        write!(block, "{source}")?;
+                        disabled = false;
+                        depth -= 1;
+                        if depth == 1 {
+                            write!(block, "{source}")?;
+                        }
                     }
 
                     // Blocks
@@ -437,12 +459,14 @@ impl Stylin {
                         disabled = false;
                     }
                     _ => {}
-                },
+                }, // end end tags
+
+                // All other events
                 _ => {
                     write!(block, "{source}")?;
-                } // end tags
-            } // end end
-        } // end events
+                }
+            } // end match event
+        } // end iterating events
 
         Ok(blocks)
     }

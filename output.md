@@ -111,6 +111,62 @@ This paragraph already has a block style.
 :::
 
 :::{custom-style="Custom Paragraph Style Name"}
-![](path/to/image.png)
+![](path)
+:::
+
+:::{custom-style="Custom Paragraph Style Name"}
+![alt](path)
+:::
+
+:::{custom-style="Custom Paragraph Style Name"}
+![](path "title")
+:::
+
+:::{custom-style="Custom Paragraph Style Name"}
+![alt](path "title")
+:::
+
+:::{custom-style="Custom Paragraph Style Name"}
+[text](url)
+:::
+
+:::{custom-style="Custom Paragraph Style Name"}
+[text](url "title")
+:::
+
+:::{custom-style="Custom Paragraph Style Name"}
+[![](path)](url)
+:::
+
+:::{custom-style="Custom Paragraph Style Name"}
+[![alt](path)](url)
+:::
+
+:::{custom-style="Custom Paragraph Style Name"}
+[![](path "title")](url)
+:::
+
+:::{custom-style="Custom Paragraph Style Name"}
+[![alt](path "title")](url)
+:::
+
+:::{custom-style="Custom Paragraph Style Name"}
+[![](path)](url "title")
+:::
+
+:::{custom-style="Custom Paragraph Style Name"}
+[![alt](path)](url "title")
+:::
+
+:::{custom-style="Custom Paragraph Style Name"}
+[![](path "title")](url "title")
+:::
+
+:::{custom-style="Custom Paragraph Style Name"}
+[![alt](path "title")](url "title")
+:::
+
+:::{custom-style="Custom Paragraph Style Name"}
+Alpha [![alt](path "title")](url "title") bravo.
 :::
 
