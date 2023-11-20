@@ -26,7 +26,7 @@ Options:
 
 ```text
 $ stylin -V
-stylin 0.4.0
+stylin 0.4.1
 ```
 
 ## Example
@@ -167,6 +167,14 @@ This paragraph already has a block style.
 [![alt](path "title")](url "title")
 
 Alpha [![alt](path "title")](url "title") bravo.
+
+* Unordered list item
+
+  ![](path)
+
+1. Ordered list item
+
+   ![](path)
 
 ~~~
 
@@ -351,6 +359,18 @@ This paragraph already has a block style.
 Alpha [![alt](path "title")](url "title") bravo.
 :::
 
+:::{custom-style="Custom Unordered List Style Name"}
+* Unordered list item
+
+  ![](path)
+:::
+
+:::{custom-style="Custom Ordered List Style Name"}
+1. Ordered list item
+
+   ![](path)
+:::
+
 ~~~
 
 # Library
@@ -369,6 +389,7 @@ See the [documentation](https://docs.rs/stylin) for usage and an example.
   images; remove convert smart quotes feature
 * 0.4.0 (2023-11-18): Fix image alt text; add links; fix comments; add unit
   tests
+* 0.4.1 (2023-11-20): Fix image/link depth issue
 
 # Notes
 

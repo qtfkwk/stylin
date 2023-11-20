@@ -103,3 +103,11 @@ This paragraph already has a block style.
 
 Alpha [![alt](path "title")](url "title") bravo.
 
+* Unordered list item
+
+  ![](path)
+
+1. Ordered list item
+
+   ![](path)
+

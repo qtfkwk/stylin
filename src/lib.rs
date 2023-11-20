@@ -123,6 +123,7 @@ impl Stylin {
         let mut disabled = false;
         let mut block = String::new();
         let mut paragraph = None;
+        let mut img_link_depth = 0;
 
         for (event, range) in pd::Parser::new_ext(input, pd::Options::all()).into_offset_iter() {
             let source = &input[range.clone()];
@@ -155,7 +156,7 @@ impl Stylin {
                     }
                     pd::Tag::Image(..) | pd::Tag::Link(..) => {
                         disabled = true;
-                        depth += 1;
+                        img_link_depth += 1;
                     }
 
                     // Blocks
@@ -324,8 +325,8 @@ impl Stylin {
                             paragraph = Some((style, true));
                         }
                         disabled = false;
-                        depth -= 1;
-                        if depth == 1 {
+                        img_link_depth -= 1;
+                        if img_link_depth == 0 {
                             write!(block, "{source}")?;
                         }
                     }

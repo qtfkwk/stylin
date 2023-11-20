@@ -532,3 +532,31 @@ fn links_and_images() {
         );
     }
 }
+
+#[test]
+fn unordered_list_with_image() {
+    let content = "\
+:::{custom-style=\"Custom Unordered List Style Name\"}
+* Unordered list item
+
+  ![](path)
+:::
+
+\
+    ";
+    assert_eq!(STYLIN.convert(content).unwrap(), vec![content]);
+}
+
+#[test]
+fn ordered_list_with_image() {
+    let content = "\
+:::{custom-style=\"Custom Ordered List Style Name\"}
+1. Ordered list item
+
+   ![](path)
+:::
+
+\
+    ";
+    assert_eq!(STYLIN.convert(content).unwrap(), vec![content]);
+}

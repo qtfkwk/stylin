@@ -170,3 +170,15 @@ This paragraph already has a block style.
 Alpha [![alt](path "title")](url "title") bravo.
 :::
 
+:::{custom-style="Custom Unordered List Style Name"}
+* Unordered list item
+
+  ![](path)
+:::
+
+:::{custom-style="Custom Ordered List Style Name"}
+1. Ordered list item
+
+   ![](path)
+:::
+

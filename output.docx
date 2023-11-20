@@ -175,3 +175,15 @@ alt="alt" /></a></p>
 <p>Alpha <a href="url" title="title"><img src="path" title="title"
 alt="alt" /></a> bravo.</p>
 </div>
+<div data-custom-style="Custom Unordered List Style Name">
+<ul>
+<li><p>Unordered list item</p>
+<p><img src="path" /></p></li>
+</ul>
+</div>
+<div data-custom-style="Custom Ordered List Style Name">
+<ol type="1">
+<li><p>Ordered list item</p>
+<p><img src="path" /></p></li>
+</ol>
+</div>
