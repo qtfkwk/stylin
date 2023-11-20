@@ -182,3 +182,19 @@ Alpha [![alt](path "title")](url "title") bravo.
    ![](path)
 :::
 
+:::{custom-style="Custom Table Style Name"}
+A | B
+---|---
+1 | ![alt](path)
+:::
+
+:::{custom-style="Custom Blockquote Style Name"}
+![alt](path)
+:::
+
+:::{custom-style="Custom Table Style Name"}
+A | B
+---|---
+1 | 2<br>3
+:::
+

@@ -155,7 +155,6 @@ impl Stylin {
                         }
                     }
                     pd::Tag::Image(..) | pd::Tag::Link(..) => {
-                        disabled = true;
                         img_link_depth += 1;
                     }
 
@@ -256,7 +255,7 @@ impl Stylin {
 
                 // Other events
                 pd::Event::Code(s) => {
-                    if !disabled {
+                    if !disabled && img_link_depth == 0 {
                         let mut done = false;
                         if let Some((style, printed)) = paragraph {
                             if printed {
@@ -275,7 +274,7 @@ impl Stylin {
                     }
                 }
                 pd::Event::Text(_s) => {
-                    if !disabled {
+                    if !disabled && img_link_depth == 0 {
                         if let Some((style, printed)) = paragraph {
                             if printed {
                                 write!(block, "{source}")?;
@@ -324,9 +323,8 @@ impl Stylin {
                             writeln!(block, ":::{{custom-style=\"{style}\"}}")?;
                             paragraph = Some((style, true));
                         }
-                        disabled = false;
                         img_link_depth -= 1;
-                        if img_link_depth == 0 {
+                        if !disabled && img_link_depth == 0 {
                             write!(block, "{source}")?;
                         }
                     }
@@ -464,7 +462,9 @@ impl Stylin {
 
                 // All other events
                 _ => {
-                    write!(block, "{source}")?;
+                    if !disabled && img_link_depth == 0 {
+                        write!(block, "{source}")?;
+                    }
                 }
             } // end match event
         } // end iterating events

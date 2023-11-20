@@ -111,3 +111,13 @@ Alpha [![alt](path "title")](url "title") bravo.
 
    ![](path)
 
+A | B
+---|---
+1 | ![alt](path)
+
+> ![alt](path)
+
+A | B
+---|---
+1 | 2<br>3
+

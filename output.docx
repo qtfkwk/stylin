@@ -187,3 +187,41 @@ alt="alt" /></a> bravo.</p>
 <p><img src="path" /></p></li>
 </ol>
 </div>
+<div data-custom-style="Custom Table Style Name">
+<table>
+<thead>
+<tr class="header">
+<th>A</th>
+<th>B</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><img src="path" alt="alt" /></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div data-custom-style="Custom Blockquote Style Name">
+<figure>
+<img src="path" alt="alt" />
+<figcaption aria-hidden="true">alt</figcaption>
+</figure>
+</div>
+<div data-custom-style="Custom Table Style Name">
+<table>
+<thead>
+<tr class="header">
+<th>A</th>
+<th>B</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>2<br>3</td>
+</tr>
+</tbody>
+</table>
+</div>

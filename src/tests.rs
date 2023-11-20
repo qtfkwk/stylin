@@ -535,7 +535,20 @@ fn links_and_images() {
 
 #[test]
 fn unordered_list_with_image() {
-    let content = "\
+    assert_eq!(
+        STYLIN
+            .convert(
+                "\
+* Unordered list item
+
+  ![](path)
+
+\
+                ",
+            )
+            .unwrap(),
+        vec![
+            "\
 :::{custom-style=\"Custom Unordered List Style Name\"}
 * Unordered list item
 
@@ -543,13 +556,27 @@ fn unordered_list_with_image() {
 :::
 
 \
-    ";
-    assert_eq!(STYLIN.convert(content).unwrap(), vec![content]);
+            ",
+        ],
+    );
 }
 
 #[test]
 fn ordered_list_with_image() {
-    let content = "\
+    assert_eq!(
+        STYLIN
+            .convert(
+                "\
+1. Ordered list item
+
+   ![](path)
+
+\
+                ",
+            )
+            .unwrap(),
+        vec![
+            "\
 :::{custom-style=\"Custom Ordered List Style Name\"}
 1. Ordered list item
 
@@ -557,6 +584,86 @@ fn ordered_list_with_image() {
 :::
 
 \
-    ";
-    assert_eq!(STYLIN.convert(content).unwrap(), vec![content]);
+            ",
+        ],
+    );
+}
+
+#[test]
+fn table_with_image() {
+    assert_eq!(
+        STYLIN
+            .convert(
+                "\
+A | B
+---|---
+1 | ![alt](path)
+
+\
+                ",
+            )
+            .unwrap(),
+        vec![
+            "\
+:::{custom-style=\"Custom Table Style Name\"}
+A | B
+---|---
+1 | ![alt](path)
+:::
+
+\
+            ",
+        ],
+    );
+}
+
+#[test]
+fn blockquote_with_image() {
+    assert_eq!(
+        STYLIN
+            .convert(
+                "\
+> ![alt](path)
+
+\
+                ",
+            )
+            .unwrap(),
+        vec![
+            "\
+:::{custom-style=\"Custom Blockquote Style Name\"}
+![alt](path)
+:::
+
+\
+            ",
+        ],
+    );
+}
+#[test]
+fn blockquote_with_br() {
+    assert_eq!(
+        STYLIN
+            .convert(
+                "\
+A | B
+---|---
+1 | 2<br>3
+
+\
+                ",
+            )
+            .unwrap(),
+        vec![
+            "\
+:::{custom-style=\"Custom Table Style Name\"}
+A | B
+---|---
+1 | 2<br>3
+:::
+
+\
+            ",
+        ],
+    );
 }

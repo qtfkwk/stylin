@@ -26,7 +26,7 @@ Options:
 
 ```text
 $ stylin -V
-stylin 0.4.1
+stylin 0.4.2
 ```
 
 ## Example
@@ -175,6 +175,16 @@ Alpha [![alt](path "title")](url "title") bravo.
 1. Ordered list item
 
    ![](path)
+
+A | B
+---|---
+1 | ![alt](path)
+
+> ![alt](path)
+
+A | B
+---|---
+1 | 2<br>3
 
 ~~~
 
@@ -371,6 +381,22 @@ Alpha [![alt](path "title")](url "title") bravo.
    ![](path)
 :::
 
+:::{custom-style="Custom Table Style Name"}
+A | B
+---|---
+1 | ![alt](path)
+:::
+
+:::{custom-style="Custom Blockquote Style Name"}
+![alt](path)
+:::
+
+:::{custom-style="Custom Table Style Name"}
+A | B
+---|---
+1 | 2<br>3
+:::
+
 ~~~
 
 # Library
@@ -390,6 +416,8 @@ See the [documentation](https://docs.rs/stylin) for usage and an example.
 * 0.4.0 (2023-11-18): Fix image alt text; add links; fix comments; add unit
   tests
 * 0.4.1 (2023-11-20): Fix image/link depth issue
+* 0.4.2 (2023-11-20): Fix image/link and/or other content in table or blockquote
+  issue; fix image/link depth tests
 
 # Notes
 

@@ -11,4 +11,6 @@
 * 0.4.0 (2023-11-18): Fix image alt text; add links; fix comments; add unit
   tests
 * 0.4.1 (2023-11-20): Fix image/link depth issue
+* 0.4.2 (2023-11-20): Fix image/link and/or other content in table or blockquote
+  issue; fix image/link depth tests
 
