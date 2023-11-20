@@ -225,3 +225,8 @@ alt="alt" /></a> bravo.</p>
 </tbody>
 </table>
 </div>
+<div data-custom-style="Custom Paragraph Style Name">
+<p>This code span has a backslash: <span
+data-custom-style="Custom Code Style Name">Code span with a \
+backslash</span>.</p>
+</div>

@@ -198,3 +198,7 @@ A | B
 1 | 2<br>3
 :::
 
+:::{custom-style="Custom Paragraph Style Name"}
+This code span has a backslash: [Code span with a \\ backslash]{custom-style="Custom Code Style Name"}.
+:::
+

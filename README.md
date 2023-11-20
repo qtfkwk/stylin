@@ -26,7 +26,7 @@ Options:
 
 ```text
 $ stylin -V
-stylin 0.4.2
+stylin 0.4.3
 ```
 
 ## Example
@@ -185,6 +185,8 @@ A | B
 A | B
 ---|---
 1 | 2<br>3
+
+This code span has a backslash: `Code span with a \ backslash`.
 
 ~~~
 
@@ -397,6 +399,10 @@ A | B
 1 | 2<br>3
 :::
 
+:::{custom-style="Custom Paragraph Style Name"}
+This code span has a backslash: [Code span with a \\ backslash]{custom-style="Custom Code Style Name"}.
+:::
+
 ~~~
 
 # Library
@@ -418,6 +424,8 @@ See the [documentation](https://docs.rs/stylin) for usage and an example.
 * 0.4.1 (2023-11-20): Fix image/link depth issue
 * 0.4.2 (2023-11-20): Fix image/link and/or other content in table or blockquote
   issue; fix image/link depth tests
+* 0.4.3 (2023-11-20): Add note #5 to avoid using a single style for blocks and
+  spans; properly handle backslashes in styled code spans
 
 # Notes
 
@@ -433,4 +441,12 @@ See the [documentation](https://docs.rs/stylin) for usage and an example.
 
 4. So-called "double styles" (`emphasis_strong`, `strong_emphasis`, and
    `strong_code`) each require the base styles also be defined.
+
+5. Never define a single style name to be used by both blocks and spans!
+   If you do and a document uses it, there will be conflicts later in the
+   pipeline.
+   For instance, in Microsoft Word, the style will be *upgraded* to a block
+   style, so a span that uses it inside a block will override the correct block
+   style.
+   It is best to define and use separate styles for blocks and spans.
 

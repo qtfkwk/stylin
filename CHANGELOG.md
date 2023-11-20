@@ -13,4 +13,6 @@
 * 0.4.1 (2023-11-20): Fix image/link depth issue
 * 0.4.2 (2023-11-20): Fix image/link and/or other content in table or blockquote
   issue; fix image/link depth tests
+* 0.4.3 (2023-11-20): Add note #5 to avoid using a single style for blocks and
+  spans; properly handle backslashes in styled code spans
 

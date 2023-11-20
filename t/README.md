@@ -67,3 +67,11 @@ See the [documentation](https://docs.rs/stylin) for usage and an example.
 4. So-called "double styles" (`emphasis_strong`, `strong_emphasis`, and
    `strong_code`) each require the base styles also be defined.
 
+5. Never define a single style name to be used by both blocks and spans!
+   If you do and a document uses it, there will be conflicts later in the
+   pipeline.
+   For instance, in Microsoft Word, the style will be *upgraded* to a block
+   style, so a span that uses it inside a block will override the correct block
+   style.
+   It is best to define and use separate styles for blocks and spans.
+

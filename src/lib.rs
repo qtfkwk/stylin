@@ -265,7 +265,11 @@ impl Stylin {
                                 paragraph = Some((style, true));
                             }
                         } else if let Some(style) = &self.code {
-                            write!(block, "[{s}]{{custom-style=\"{style}\"}}")?;
+                            write!(
+                                block,
+                                "[{}]{{custom-style=\"{style}\"}}",
+                                s.replace('\\', "\\\\")
+                            )?;
                             done = true;
                         }
                         if !done {

@@ -640,6 +640,7 @@ fn blockquote_with_image() {
         ],
     );
 }
+
 #[test]
 fn blockquote_with_br() {
     assert_eq!(
@@ -660,6 +661,31 @@ A | B
 A | B
 ---|---
 1 | 2<br>3
+:::
+
+\
+            ",
+        ],
+    );
+}
+
+#[test]
+fn code_span_with_backslash() {
+    assert_eq!(
+        STYLIN
+            .convert(
+                "\
+This code span has a backslash: `Code span with a \\ backslash`.
+
+\
+                ",
+            )
+            .unwrap(),
+        vec![
+            "\
+:::{custom-style=\"Custom Paragraph Style Name\"}
+This code span has a backslash: \
+[Code span with a \\\\ backslash]{custom-style=\"Custom Code Style Name\"}.
 :::
 
 \

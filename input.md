@@ -121,3 +121,5 @@ A | B
 ---|---
 1 | 2<br>3
 
+This code span has a backslash: `Code span with a \ backslash`.
+
