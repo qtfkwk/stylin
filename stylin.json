@@ -21,4 +21,5 @@
   blockquote: "Custom Blockquote Style Name",
   fenced_code_block: "Custom Fenced Code Block Style Name",
   indented_code_block: "Custom Indented Code Block Style Name",
+  figure: "Custom Figure Style Name",
 }

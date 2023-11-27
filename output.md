@@ -110,19 +110,19 @@ This paragraph already has a block style.
 * Charlie
 :::
 
-:::{custom-style="Custom Paragraph Style Name"}
+:::{custom-style="Custom Figure Style Name"}
 ![](path)
 :::
 
-:::{custom-style="Custom Paragraph Style Name"}
+:::{custom-style="Custom Figure Style Name"}
 ![alt](path)
 :::
 
-:::{custom-style="Custom Paragraph Style Name"}
+:::{custom-style="Custom Figure Style Name"}
 ![](path "title")
 :::
 
-:::{custom-style="Custom Paragraph Style Name"}
+:::{custom-style="Custom Figure Style Name"}
 ![alt](path "title")
 :::
 
@@ -134,35 +134,35 @@ This paragraph already has a block style.
 [text](url "title")
 :::
 
-:::{custom-style="Custom Paragraph Style Name"}
+:::{custom-style="Custom Figure Style Name"}
 [![](path)](url)
 :::
 
-:::{custom-style="Custom Paragraph Style Name"}
+:::{custom-style="Custom Figure Style Name"}
 [![alt](path)](url)
 :::
 
-:::{custom-style="Custom Paragraph Style Name"}
+:::{custom-style="Custom Figure Style Name"}
 [![](path "title")](url)
 :::
 
-:::{custom-style="Custom Paragraph Style Name"}
+:::{custom-style="Custom Figure Style Name"}
 [![alt](path "title")](url)
 :::
 
-:::{custom-style="Custom Paragraph Style Name"}
+:::{custom-style="Custom Figure Style Name"}
 [![](path)](url "title")
 :::
 
-:::{custom-style="Custom Paragraph Style Name"}
+:::{custom-style="Custom Figure Style Name"}
 [![alt](path)](url "title")
 :::
 
-:::{custom-style="Custom Paragraph Style Name"}
+:::{custom-style="Custom Figure Style Name"}
 [![](path "title")](url "title")
 :::
 
-:::{custom-style="Custom Paragraph Style Name"}
+:::{custom-style="Custom Figure Style Name"}
 [![alt](path "title")](url "title")
 :::
 

@@ -15,4 +15,5 @@
   issue; fix image/link depth tests
 * 0.4.3 (2023-11-20): Add note #5 to avoid using a single style for blocks and
   spans; properly handle backslashes in styled code spans
+* 0.5.0 (2023-11-27): Add `figure` style; update dependencies
 

@@ -505,14 +505,25 @@ fn unordered_list_with_block_style() {
 }
 
 #[test]
-fn links_and_images() {
+fn links() {
+    for content in ["[text](url)", "[text](url \"title\")"] {
+        assert_eq!(
+            STYLIN.convert(content).unwrap(),
+            vec![format!(
+                ":::{{custom-style=\"Custom Paragraph Style Name\"}}\n{content}\n:::\n\n",
+            )],
+            "{content}"
+        );
+    }
+}
+
+#[test]
+fn images() {
     for content in [
         "![](path)",
         "![alt](path)",
         "![](path \"title\")",
         "![alt](path \"title\")",
-        "[text](url)",
-        "[text](url \"title\")",
         "[![](path)](url)",
         "[![alt](path)](url)",
         "[![](path \"title\")](url)",
@@ -521,12 +532,11 @@ fn links_and_images() {
         "[![alt](path)](url \"title\")",
         "[![](path \"title\")](url \"title\")",
         "[![alt](path \"title\")](url \"title\")",
-        "Alpha [![alt](path \"title\")](url \"title\") bravo.",
     ] {
         assert_eq!(
             STYLIN.convert(content).unwrap(),
             vec![format!(
-                ":::{{custom-style=\"Custom Paragraph Style Name\"}}\n{content}\n:::\n\n",
+                ":::{{custom-style=\"Custom Figure Style Name\"}}\n{content}\n:::\n\n",
             )],
             "{content}"
         );

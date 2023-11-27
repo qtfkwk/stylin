@@ -89,6 +89,14 @@ cocomo
 * build
 * install
 
+# `output.md`
+
+* `input.md`
+
+```
+stylin {0} >{target}
+```
+
 # `output.docx`
 
 * `output.md`

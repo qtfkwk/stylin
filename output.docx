@@ -122,19 +122,19 @@ text</span>.</p>
 <li><p>Charlie</p></li>
 </ul>
 </div>
-<div data-custom-style="Custom Paragraph Style Name">
+<div data-custom-style="Custom Figure Style Name">
 <p><img src="path" /></p>
 </div>
-<div data-custom-style="Custom Paragraph Style Name">
+<div data-custom-style="Custom Figure Style Name">
 <figure>
 <img src="path" alt="alt" />
 <figcaption aria-hidden="true">alt</figcaption>
 </figure>
 </div>
-<div data-custom-style="Custom Paragraph Style Name">
+<div data-custom-style="Custom Figure Style Name">
 <p><img src="path" title="title" /></p>
 </div>
-<div data-custom-style="Custom Paragraph Style Name">
+<div data-custom-style="Custom Figure Style Name">
 <figure>
 <img src="path" title="title" alt="alt" />
 <figcaption aria-hidden="true">alt</figcaption>
@@ -146,28 +146,28 @@ text</span>.</p>
 <div data-custom-style="Custom Paragraph Style Name">
 <p><a href="url" title="title">text</a></p>
 </div>
-<div data-custom-style="Custom Paragraph Style Name">
+<div data-custom-style="Custom Figure Style Name">
 <p><a href="url"><img src="path" /></a></p>
 </div>
-<div data-custom-style="Custom Paragraph Style Name">
+<div data-custom-style="Custom Figure Style Name">
 <p><a href="url"><img src="path" alt="alt" /></a></p>
 </div>
-<div data-custom-style="Custom Paragraph Style Name">
+<div data-custom-style="Custom Figure Style Name">
 <p><a href="url"><img src="path" title="title" /></a></p>
 </div>
-<div data-custom-style="Custom Paragraph Style Name">
+<div data-custom-style="Custom Figure Style Name">
 <p><a href="url"><img src="path" title="title" alt="alt" /></a></p>
 </div>
-<div data-custom-style="Custom Paragraph Style Name">
+<div data-custom-style="Custom Figure Style Name">
 <p><a href="url" title="title"><img src="path" /></a></p>
 </div>
-<div data-custom-style="Custom Paragraph Style Name">
+<div data-custom-style="Custom Figure Style Name">
 <p><a href="url" title="title"><img src="path" alt="alt" /></a></p>
 </div>
-<div data-custom-style="Custom Paragraph Style Name">
+<div data-custom-style="Custom Figure Style Name">
 <p><a href="url" title="title"><img src="path" title="title" /></a></p>
 </div>
-<div data-custom-style="Custom Paragraph Style Name">
+<div data-custom-style="Custom Figure Style Name">
 <p><a href="url" title="title"><img src="path" title="title"
 alt="alt" /></a></p>
 </div>

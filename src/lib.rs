@@ -72,10 +72,11 @@ pub struct Stylin {
     paragraph: Option<String>,
     ordered_list: Option<String>,
     unordered_list: Option<String>,
+    table: Option<String>,
     blockquote: Option<String>,
     fenced_code_block: Option<String>,
     indented_code_block: Option<String>,
-    table: Option<String>,
+    figure: Option<String>,
 
     // Other
     #[serde(default = "default_debug")]
@@ -322,7 +323,18 @@ impl Stylin {
                             write!(block, "**")?;
                         }
                     }
-                    pd::Tag::Image(..) | pd::Tag::Link(..) => {
+                    pd::Tag::Image(..) => {
+                        if let Some((style, false)) = paragraph {
+                            let style = self.figure.as_ref().unwrap_or(style);
+                            writeln!(block, ":::{{custom-style=\"{style}\"}}")?;
+                            paragraph = Some((style, true));
+                        }
+                        img_link_depth -= 1;
+                        if !disabled && img_link_depth == 0 {
+                            write!(block, "{source}")?;
+                        }
+                    }
+                    pd::Tag::Link(..) => {
                         if let Some((style, false)) = paragraph {
                             writeln!(block, ":::{{custom-style=\"{style}\"}}")?;
                             paragraph = Some((style, true));

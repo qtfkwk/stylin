@@ -26,7 +26,7 @@ Options:
 
 ```text
 $ stylin -V
-stylin 0.4.3
+stylin 0.5.0
 ```
 
 ## Example
@@ -57,6 +57,7 @@ Given a configuration file, [`stylin.json`](stylin.json):
   blockquote: "Custom Blockquote Style Name",
   fenced_code_block: "Custom Fenced Code Block Style Name",
   indented_code_block: "Custom Indented Code Block Style Name",
+  figure: "Custom Figure Style Name",
 }
 ~~~
 
@@ -311,19 +312,19 @@ This paragraph already has a block style.
 * Charlie
 :::
 
-:::{custom-style="Custom Paragraph Style Name"}
+:::{custom-style="Custom Figure Style Name"}
 ![](path)
 :::
 
-:::{custom-style="Custom Paragraph Style Name"}
+:::{custom-style="Custom Figure Style Name"}
 ![alt](path)
 :::
 
-:::{custom-style="Custom Paragraph Style Name"}
+:::{custom-style="Custom Figure Style Name"}
 ![](path "title")
 :::
 
-:::{custom-style="Custom Paragraph Style Name"}
+:::{custom-style="Custom Figure Style Name"}
 ![alt](path "title")
 :::
 
@@ -335,35 +336,35 @@ This paragraph already has a block style.
 [text](url "title")
 :::
 
-:::{custom-style="Custom Paragraph Style Name"}
+:::{custom-style="Custom Figure Style Name"}
 [![](path)](url)
 :::
 
-:::{custom-style="Custom Paragraph Style Name"}
+:::{custom-style="Custom Figure Style Name"}
 [![alt](path)](url)
 :::
 
-:::{custom-style="Custom Paragraph Style Name"}
+:::{custom-style="Custom Figure Style Name"}
 [![](path "title")](url)
 :::
 
-:::{custom-style="Custom Paragraph Style Name"}
+:::{custom-style="Custom Figure Style Name"}
 [![alt](path "title")](url)
 :::
 
-:::{custom-style="Custom Paragraph Style Name"}
+:::{custom-style="Custom Figure Style Name"}
 [![](path)](url "title")
 :::
 
-:::{custom-style="Custom Paragraph Style Name"}
+:::{custom-style="Custom Figure Style Name"}
 [![alt](path)](url "title")
 :::
 
-:::{custom-style="Custom Paragraph Style Name"}
+:::{custom-style="Custom Figure Style Name"}
 [![](path "title")](url "title")
 :::
 
-:::{custom-style="Custom Paragraph Style Name"}
+:::{custom-style="Custom Figure Style Name"}
 [![alt](path "title")](url "title")
 :::
 
@@ -426,6 +427,7 @@ See the [documentation](https://docs.rs/stylin) for usage and an example.
   issue; fix image/link depth tests
 * 0.4.3 (2023-11-20): Add note #5 to avoid using a single style for blocks and
   spans; properly handle backslashes in styled code spans
+* 0.5.0 (2023-11-27): Add `figure` style; update dependencies
 
 # Notes
 
