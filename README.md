@@ -26,7 +26,7 @@ Options:
 
 ```text
 $ stylin -V
-stylin 0.5.0
+stylin 0.5.1
 ```
 
 ## Example
@@ -375,13 +375,19 @@ Alpha [![alt](path "title")](url "title") bravo.
 :::{custom-style="Custom Unordered List Style Name"}
 * Unordered list item
 
+  :::{custom-style="Custom Figure Style Name"}
   ![](path)
+  :::
+
 :::
 
 :::{custom-style="Custom Ordered List Style Name"}
 1. Ordered list item
 
+   :::{custom-style="Custom Figure Style Name"}
    ![](path)
+   :::
+
 :::
 
 :::{custom-style="Custom Table Style Name"}
@@ -428,6 +434,7 @@ See the [documentation](https://docs.rs/stylin) for usage and an example.
 * 0.4.3 (2023-11-20): Add note #5 to avoid using a single style for blocks and
   spans; properly handle backslashes in styled code spans
 * 0.5.0 (2023-11-27): Add `figure` style; update dependencies
+* 0.5.1 (2023-11-27): Fix figure style in list items
 
 # Notes
 

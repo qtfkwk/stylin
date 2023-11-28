@@ -173,13 +173,19 @@ Alpha [![alt](path "title")](url "title") bravo.
 :::{custom-style="Custom Unordered List Style Name"}
 * Unordered list item
 
+  :::{custom-style="Custom Figure Style Name"}
   ![](path)
+  :::
+
 :::
 
 :::{custom-style="Custom Ordered List Style Name"}
 1. Ordered list item
 
+   :::{custom-style="Custom Figure Style Name"}
    ![](path)
+   :::
+
 :::
 
 :::{custom-style="Custom Table Style Name"}

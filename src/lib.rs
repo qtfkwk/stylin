@@ -120,6 +120,8 @@ impl Stylin {
         let mut lists = vec![];
         let mut first_li = false;
         let mut first_li_p = false;
+        let mut li_p = false;
+        let mut end_div = false;
         let mut indents = vec![];
         let mut disabled = false;
         let mut block = String::new();
@@ -197,11 +199,13 @@ impl Stylin {
                                 if !first_li_p {
                                     write!(block, "\n\n{}", indents.join(""))?;
                                 }
+                                li_p = true;
                                 first_li_p = false;
                             } else if let Some(Some(_n)) = lists.last() {
                                 if !first_li_p {
                                     write!(block, "\n\n{}", indents.join(""))?;
                                 }
+                                li_p = true;
                                 first_li_p = false;
                             } else if depth == 0 {
                                 if let Some(style) = &self.paragraph {
@@ -233,7 +237,7 @@ impl Stylin {
                     }
                     pd::Tag::Item => {
                         if !first_li {
-                            writeln!(block,)?;
+                            writeln!(block)?;
                         }
                         first_li = false;
                         match lists.last().unwrap() {
@@ -324,7 +328,15 @@ impl Stylin {
                         }
                     }
                     pd::Tag::Image(..) => {
-                        if let Some((style, false)) = paragraph {
+                        if li_p && self.figure.is_some() {
+                            let style = self.figure.as_ref().unwrap();
+                            write!(
+                                block,
+                                ":::{{custom-style=\"{style}\"}}\n{}",
+                                indents.join(""),
+                            )?;
+                            end_div = true;
+                        } else if let Some((style, false)) = paragraph {
                             let style = self.figure.as_ref().unwrap_or(style);
                             writeln!(block, ":::{{custom-style=\"{style}\"}}")?;
                             paragraph = Some((style, true));
@@ -376,6 +388,11 @@ impl Stylin {
                             }
                             block = self.process_block(block, &mut blocks);
                         }
+                        if end_div {
+                            writeln!(block, "\n{}:::", indents.join(""))?;
+                            end_div = false;
+                        }
+                        li_p = false;
                     }
                     pd::Tag::List(t) => {
                         depth -= 1;

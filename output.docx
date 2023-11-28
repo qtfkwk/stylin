@@ -178,13 +178,17 @@ alt="alt" /></a> bravo.</p>
 <div data-custom-style="Custom Unordered List Style Name">
 <ul>
 <li><p>Unordered list item</p>
-<p><img src="path" /></p></li>
+<div data-custom-style="Custom Figure Style Name">
+<p><img src="path" /></p>
+</div></li>
 </ul>
 </div>
 <div data-custom-style="Custom Ordered List Style Name">
 <ol type="1">
 <li><p>Ordered list item</p>
-<p><img src="path" /></p></li>
+<div data-custom-style="Custom Figure Style Name">
+<p><img src="path" /></p>
+</div></li>
 </ol>
 </div>
 <div data-custom-style="Custom Table Style Name">
