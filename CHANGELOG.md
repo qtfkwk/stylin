@@ -17,4 +17,6 @@
   spans; properly handle backslashes in styled code spans
 * 0.5.0 (2023-11-27): Add `figure` style; update dependencies
 * 0.5.1 (2023-11-27): Fix figure style in list items
+* 0.6.0 (2023-11-29): Fix nested lists; add pipeline example / documentation /
+  diagram; update dependencies
 

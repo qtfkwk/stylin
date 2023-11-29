@@ -4,6 +4,13 @@ Convert markdown to pandoc markdown with custom styles
 
 Stylin provides a [library](#library) and a [command line utility](#cli).
 
+# Pipeline
+
+Stylin can be used in a pipeline with other tools, like [mkrs], [kapow],
+[pandoc], etc.
+
+![](pipeline.png)
+
 # CLI
 
 ## Usage
@@ -26,7 +33,7 @@ Options:
 
 ```text
 $ stylin -V
-stylin 0.5.1
+stylin 0.6.0
 ```
 
 ## Example
@@ -80,8 +87,15 @@ Here's a code span with a backtick: ``code span with ` backtick``.
 
 * Unordered list item 2
 
+  * Nested list item
+
 1. Ordered list item 1
+
+   Paragraph
+
 2. Ordered list item 2
+
+   1. Nested list item
 
 ## Heading level 2
 
@@ -139,49 +153,49 @@ This paragraph already has a block style.
 * Charlie
 :::
 
-![](path)
+![](img.webp)
 
-![alt](path)
+![alt](img.webp)
 
-![](path "title")
+![](img.webp "title")
 
-![alt](path "title")
+![alt](img.webp "title")
 
-[text](url)
+[text](https://github.com/qtfkwk/stylin)
 
-[text](url "title")
+[text](https://github.com/qtfkwk/stylin "title")
 
-[![](path)](url)
+[![](img.webp)](https://github.com/qtfkwk/stylin)
 
-[![alt](path)](url)
+[![alt](img.webp)](https://github.com/qtfkwk/stylin)
 
-[![](path "title")](url)
+[![](img.webp "title")](https://github.com/qtfkwk/stylin)
 
-[![alt](path "title")](url)
+[![alt](img.webp "title")](https://github.com/qtfkwk/stylin)
 
-[![](path)](url "title")
+[![](img.webp)](https://github.com/qtfkwk/stylin "title")
 
-[![alt](path)](url "title")
+[![alt](img.webp)](https://github.com/qtfkwk/stylin "title")
 
-[![](path "title")](url "title")
+[![](img.webp "title")](https://github.com/qtfkwk/stylin "title")
 
-[![alt](path "title")](url "title")
+[![alt](img.webp "title")](https://github.com/qtfkwk/stylin "title")
 
-Alpha [![alt](path "title")](url "title") bravo.
+Alpha [![alt](img.webp "title")](https://github.com/qtfkwk/stylin "title") bravo.
 
 * Unordered list item
 
-  ![](path)
+  ![](img.webp)
 
 1. Ordered list item
 
-   ![](path)
+   ![](img.webp)
 
 A | B
 ---|---
-1 | ![alt](path)
+1 | ![alt](img.webp)
 
-> ![alt](path)
+> ![alt](img.webp)
 
 A | B
 ---|---
@@ -194,10 +208,10 @@ This code span has a backslash: `Code span with a \ backslash`.
 Run the stylin command:
 
 ```bash
-stylin input.md >output.md
+stylin input.md >stylin.md
 ```
 
-To produce the output file, [`output.md`](output.md):
+To produce the output file, [`stylin.md`](stylin.md):
 
 ~~~text
 :::{custom-style="Custom Heading Level 1 Style Name"}
@@ -221,17 +235,27 @@ Here's a code span with a backtick: [code span with ` backtick]{custom-style="Cu
 :::
 
 :::{custom-style="Custom Unordered List Style Name"}
+
 * Unordered list item 1
 
   Paragraph
 
 * Unordered list item 2
+
+  * Nested list item
+
 :::
 
 :::{custom-style="Custom Ordered List Style Name"}
+
 1. Ordered list item 1
 
+   Paragraph
+
 1. Ordered list item 2
+
+   1. Nested list item
+
 :::
 
 :::{custom-style="Custom Heading Level 2 Style Name"}
@@ -305,87 +329,91 @@ This paragraph already has a block style.
 :::
 
 :::{custom-style="Some Other Custom Style"}
+
 * Alpha
 
 * Bravo
 
 * Charlie
+
 :::
 
 :::{custom-style="Custom Figure Style Name"}
-![](path)
+![](img.webp)
 :::
 
 :::{custom-style="Custom Figure Style Name"}
-![alt](path)
+![alt](img.webp)
 :::
 
 :::{custom-style="Custom Figure Style Name"}
-![](path "title")
+![](img.webp "title")
 :::
 
 :::{custom-style="Custom Figure Style Name"}
-![alt](path "title")
+![alt](img.webp "title")
 :::
 
 :::{custom-style="Custom Paragraph Style Name"}
-[text](url)
+[text](https://github.com/qtfkwk/stylin)
 :::
 
 :::{custom-style="Custom Paragraph Style Name"}
-[text](url "title")
+[text](https://github.com/qtfkwk/stylin "title")
 :::
 
 :::{custom-style="Custom Figure Style Name"}
-[![](path)](url)
+[![](img.webp)](https://github.com/qtfkwk/stylin)
 :::
 
 :::{custom-style="Custom Figure Style Name"}
-[![alt](path)](url)
+[![alt](img.webp)](https://github.com/qtfkwk/stylin)
 :::
 
 :::{custom-style="Custom Figure Style Name"}
-[![](path "title")](url)
+[![](img.webp "title")](https://github.com/qtfkwk/stylin)
 :::
 
 :::{custom-style="Custom Figure Style Name"}
-[![alt](path "title")](url)
+[![alt](img.webp "title")](https://github.com/qtfkwk/stylin)
 :::
 
 :::{custom-style="Custom Figure Style Name"}
-[![](path)](url "title")
+[![](img.webp)](https://github.com/qtfkwk/stylin "title")
 :::
 
 :::{custom-style="Custom Figure Style Name"}
-[![alt](path)](url "title")
+[![alt](img.webp)](https://github.com/qtfkwk/stylin "title")
 :::
 
 :::{custom-style="Custom Figure Style Name"}
-[![](path "title")](url "title")
+[![](img.webp "title")](https://github.com/qtfkwk/stylin "title")
 :::
 
 :::{custom-style="Custom Figure Style Name"}
-[![alt](path "title")](url "title")
+[![alt](img.webp "title")](https://github.com/qtfkwk/stylin "title")
 :::
 
 :::{custom-style="Custom Paragraph Style Name"}
-Alpha [![alt](path "title")](url "title") bravo.
+Alpha [![alt](img.webp "title")](https://github.com/qtfkwk/stylin "title") bravo.
 :::
 
 :::{custom-style="Custom Unordered List Style Name"}
+
 * Unordered list item
 
   :::{custom-style="Custom Figure Style Name"}
-  ![](path)
+  ![](img.webp)
   :::
 
 :::
 
 :::{custom-style="Custom Ordered List Style Name"}
+
 1. Ordered list item
 
    :::{custom-style="Custom Figure Style Name"}
-   ![](path)
+   ![](img.webp)
    :::
 
 :::
@@ -393,11 +421,11 @@ Alpha [![alt](path "title")](url "title") bravo.
 :::{custom-style="Custom Table Style Name"}
 A | B
 ---|---
-1 | ![alt](path)
+1 | ![alt](img.webp)
 :::
 
 :::{custom-style="Custom Blockquote Style Name"}
-![alt](path)
+![alt](img.webp)
 :::
 
 :::{custom-style="Custom Table Style Name"}
@@ -435,6 +463,8 @@ See the [documentation](https://docs.rs/stylin) for usage and an example.
   spans; properly handle backslashes in styled code spans
 * 0.5.0 (2023-11-27): Add `figure` style; update dependencies
 * 0.5.1 (2023-11-27): Fix figure style in list items
+* 0.6.0 (2023-11-29): Fix nested lists; add pipeline example / documentation /
+  diagram; update dependencies
 
 # Notes
 
@@ -443,7 +473,9 @@ See the [documentation](https://docs.rs/stylin) for usage and an example.
    As a result, output from a *null configuration* (`{}`), will not be identical
    to the input, but what's the point of a null configuration? 
 
-2. Block styles are applied to outermost blocks only.
+2. Block styles are generally applied to outermost blocks only, except for the
+   figure style (if enabled), which will be applied to figure list item
+   paragraphs.
 
 3. Table style works but is broken in pandoc versions greater than 2.7.1 (see
    [jgm/pandoc#6496](https://github.com/jgm/pandoc/issues/6496)).

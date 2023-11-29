@@ -4,6 +4,13 @@ Convert markdown to pandoc markdown with custom styles
 
 Stylin provides a [library](#library) and a [command line utility](#cli).
 
+# Pipeline
+
+Stylin can be used in a pipeline with other tools, like [mkrs], [kapow],
+[pandoc], etc.
+
+![](pipeline.png)
+
 # CLI
 
 ## Usage
@@ -35,15 +42,13 @@ And an input file, [`input.md`](input.md):
 Run the stylin command:
 
 ```bash
-stylin input.md >output.md
-!run:../target/release/stylin -c ../stylin.json ../input.md >../output.md 2>temp \
-&& cat temp && rm temp
+stylin input.md >stylin.md
 ```
 
-To produce the output file, [`output.md`](output.md):
+To produce the output file, [`stylin.md`](stylin.md):
 
 ~~~text
-!inc:../output.md
+!inc:../stylin.md
 ~~~
 
 # Library
@@ -59,7 +64,9 @@ See the [documentation](https://docs.rs/stylin) for usage and an example.
    As a result, output from a *null configuration* (`{}`), will not be identical
    to the input, but what's the point of a null configuration? 
 
-2. Block styles are applied to outermost blocks only.
+2. Block styles are generally applied to outermost blocks only, except for the
+   figure style (if enabled), which will be applied to figure list item
+   paragraphs.
 
 3. Table style works but is broken in pandoc versions greater than 2.7.1 (see
    [jgm/pandoc#6496](https://github.com/jgm/pandoc/issues/6496)).

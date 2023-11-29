@@ -1,9 +1,10 @@
 # build
 
 * clippy
-* `README.md`
-* `output.docx`
 * test
+* `README.md`
+* `pandoc.docx`
+* `pipeline.png`
 
 ```
 cargo build --release
@@ -89,19 +90,43 @@ cocomo
 * build
 * install
 
-# `output.md`
+# `kapow.md`
 
 * `input.md`
 
 ```
-stylin {0} >{target}
+kapow {0} >{target}
 ```
 
-# `output.docx`
+# `stylin.md`
 
-* `output.md`
+* `kapow.md`
+* `README.md`
 
 ```
-pandoc {0} >{target}
+./target/release/stylin {0} >{target}
+```
+
+# `reference.docx`
+
+```
+pandoc -o {target} --print-default-data-file reference.docx
+```
+
+# `pandoc.docx`
+
+* `stylin.md`
+* `reference.docx`
+
+```
+pandoc --reference-doc=reference.docx {0} -o {target}
+```
+
+# `pipeline.png`
+
+* `pipeline.dot`
+
+```
+dot -Tpng {0} >{target}
 ```
 

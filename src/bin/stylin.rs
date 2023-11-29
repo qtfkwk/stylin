@@ -31,7 +31,7 @@ fn main() -> Result<()> {
     }
     let s = Stylin::from_path(&cli.config).unwrap_or_default();
     for input_file in &cli.input_files {
-        let input = if input_file.as_os_str() == "-" {
+        let input = if input_file.as_os_str() == "-" && !input_file.exists() {
             std::io::read_to_string(std::io::stdin())?
         } else {
             std::fs::read_to_string(input_file)?

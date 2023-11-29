@@ -1,0 +1,52 @@
+digraph {
+
+// Tools
+mkrs [shape=diamond]
+kapow [shape=diamond]
+stylin [shape=diamond]
+
+// External tools
+pandoc1 [shape=diamond label="pandoc"]
+pandoc2 [shape=diamond label="pandoc"]
+
+// mkrs targets
+build [shape=box label="build"]
+
+// Inputs
+input_md [shape=box label="input.md"]
+reference_docx [shape=box label="reference.docx"]
+stylin_json [shape=box label="stylin.json"]
+
+// Outputs
+kapow_md [shape=box label="kapow.md"]
+stylin_md [shape=box label="stylin.md"]
+pandoc_docx [shape=oval label="pandoc.docx"]
+
+start [shape=oval]
+end [shape=oval]
+
+{rank=same;stylin_json;input_md}
+{rank=same;stylin;pandoc1}
+{rank=same;reference_docx;stylin_md}
+
+//------------------------------------------------------------------------------
+
+start -> mkrs -> build;
+
+// Create reference.docx via pandoc
+build -> pandoc1 -> reference_docx
+
+// Create pandoc.docx from input.md, stylin.json, and reference.docx via kapow,
+// stylin, and pandoc, with intermediate outputs kapow.md and stylin.md:
+build -> input_md;
+input_md -> kapow -> kapow_md;
+build -> stylin_json -> stylin;
+kapow_md -> stylin -> stylin_md
+stylin_md -> pandoc2;
+reference_docx -> pandoc2;
+pandoc2 -> pandoc_docx;
+
+// Outputs
+pandoc_docx -> end;
+
+}

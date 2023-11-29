@@ -261,6 +261,8 @@ fn unordered_list() {
 
 * Unordered list item 2
 
+  * Nested list item
+
 \
                 ",
             )
@@ -268,11 +270,15 @@ fn unordered_list() {
         vec![
             "\
 :::{custom-style=\"Custom Unordered List Style Name\"}
+
 * Unordered list item 1
 
   Paragraph
 
 * Unordered list item 2
+
+  * Nested list item
+
 :::
 
 \
@@ -288,7 +294,12 @@ fn ordered_list() {
             .convert(
                 "\
 1. Ordered list item 1
+
+   Paragraph
+
 2. Ordered list item 2
+
+   1. Nested list item
 
 \
                 ",
@@ -297,9 +308,15 @@ fn ordered_list() {
         vec![
             "\
 :::{custom-style=\"Custom Ordered List Style Name\"}
+
 1. Ordered list item 1
 
+   Paragraph
+
 1. Ordered list item 2
+
+   1. Nested list item
+
 :::
 
 \
@@ -490,18 +507,36 @@ This paragraph already has a block style.
 
 #[test]
 fn unordered_list_with_block_style() {
-    let content = "\
+    assert_eq!(
+        STYLIN
+            .convert(
+                "\
 :::{custom-style=\"Some Other Custom Style\"}
+* Alpha
+* Bravo
+* Charlie
+:::
+
+\
+                ",
+            )
+            .unwrap(),
+        vec![
+            "\
+:::{custom-style=\"Some Other Custom Style\"}
+
 * Alpha
 
 * Bravo
 
 * Charlie
+
 :::
 
 \
-    ";
-    assert_eq!(STYLIN.convert(content).unwrap(), vec![content]);
+            ",
+        ]
+    );
 }
 
 #[test]
@@ -560,6 +595,7 @@ fn unordered_list_with_image() {
         vec![
             "\
 :::{custom-style=\"Custom Unordered List Style Name\"}
+
 * Unordered list item
 
   :::{custom-style=\"Custom Figure Style Name\"}
@@ -591,6 +627,7 @@ fn ordered_list_with_image() {
         vec![
             "\
 :::{custom-style=\"Custom Ordered List Style Name\"}
+
 1. Ordered list item
 
    :::{custom-style=\"Custom Figure Style Name\"}

@@ -19,17 +19,27 @@ Here's a code span with a backtick: [code span with ` backtick]{custom-style="Cu
 :::
 
 :::{custom-style="Custom Unordered List Style Name"}
+
 * Unordered list item 1
 
   Paragraph
 
 * Unordered list item 2
+
+  * Nested list item
+
 :::
 
 :::{custom-style="Custom Ordered List Style Name"}
+
 1. Ordered list item 1
 
+   Paragraph
+
 1. Ordered list item 2
+
+   1. Nested list item
+
 :::
 
 :::{custom-style="Custom Heading Level 2 Style Name"}
@@ -103,87 +113,91 @@ This paragraph already has a block style.
 :::
 
 :::{custom-style="Some Other Custom Style"}
+
 * Alpha
 
 * Bravo
 
 * Charlie
+
 :::
 
 :::{custom-style="Custom Figure Style Name"}
-![](path)
+![](img.webp)
 :::
 
 :::{custom-style="Custom Figure Style Name"}
-![alt](path)
+![alt](img.webp)
 :::
 
 :::{custom-style="Custom Figure Style Name"}
-![](path "title")
+![](img.webp "title")
 :::
 
 :::{custom-style="Custom Figure Style Name"}
-![alt](path "title")
+![alt](img.webp "title")
 :::
 
 :::{custom-style="Custom Paragraph Style Name"}
-[text](url)
+[text](https://github.com/qtfkwk/stylin)
 :::
 
 :::{custom-style="Custom Paragraph Style Name"}
-[text](url "title")
+[text](https://github.com/qtfkwk/stylin "title")
 :::
 
 :::{custom-style="Custom Figure Style Name"}
-[![](path)](url)
+[![](img.webp)](https://github.com/qtfkwk/stylin)
 :::
 
 :::{custom-style="Custom Figure Style Name"}
-[![alt](path)](url)
+[![alt](img.webp)](https://github.com/qtfkwk/stylin)
 :::
 
 :::{custom-style="Custom Figure Style Name"}
-[![](path "title")](url)
+[![](img.webp "title")](https://github.com/qtfkwk/stylin)
 :::
 
 :::{custom-style="Custom Figure Style Name"}
-[![alt](path "title")](url)
+[![alt](img.webp "title")](https://github.com/qtfkwk/stylin)
 :::
 
 :::{custom-style="Custom Figure Style Name"}
-[![](path)](url "title")
+[![](img.webp)](https://github.com/qtfkwk/stylin "title")
 :::
 
 :::{custom-style="Custom Figure Style Name"}
-[![alt](path)](url "title")
+[![alt](img.webp)](https://github.com/qtfkwk/stylin "title")
 :::
 
 :::{custom-style="Custom Figure Style Name"}
-[![](path "title")](url "title")
+[![](img.webp "title")](https://github.com/qtfkwk/stylin "title")
 :::
 
 :::{custom-style="Custom Figure Style Name"}
-[![alt](path "title")](url "title")
+[![alt](img.webp "title")](https://github.com/qtfkwk/stylin "title")
 :::
 
 :::{custom-style="Custom Paragraph Style Name"}
-Alpha [![alt](path "title")](url "title") bravo.
+Alpha [![alt](img.webp "title")](https://github.com/qtfkwk/stylin "title") bravo.
 :::
 
 :::{custom-style="Custom Unordered List Style Name"}
+
 * Unordered list item
 
   :::{custom-style="Custom Figure Style Name"}
-  ![](path)
+  ![](img.webp)
   :::
 
 :::
 
 :::{custom-style="Custom Ordered List Style Name"}
+
 1. Ordered list item
 
    :::{custom-style="Custom Figure Style Name"}
-   ![](path)
+   ![](img.webp)
    :::
 
 :::
@@ -191,11 +205,11 @@ Alpha [![alt](path "title")](url "title") bravo.
 :::{custom-style="Custom Table Style Name"}
 A | B
 ---|---
-1 | ![alt](path)
+1 | ![alt](img.webp)
 :::
 
 :::{custom-style="Custom Blockquote Style Name"}
-![alt](path)
+![alt](img.webp)
 :::
 
 :::{custom-style="Custom Table Style Name"}

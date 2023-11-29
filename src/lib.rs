@@ -118,10 +118,9 @@ impl Stylin {
         // State
         let mut depth = 0;
         let mut lists = vec![];
-        let mut first_li = false;
         let mut first_li_p = false;
         let mut li_p = false;
-        let mut end_div = false;
+        let mut end_figure_div = false;
         let mut indents = vec![];
         let mut disabled = false;
         let mut block = String::new();
@@ -197,13 +196,19 @@ impl Stylin {
                         if !disabled {
                             if let Some(None) = lists.last() {
                                 if !first_li_p {
-                                    write!(block, "\n\n{}", indents.join(""))?;
+                                    if !block.ends_with("\n\n") {
+                                        writeln!(block, "\n")?;
+                                    }
+                                    write!(block, "{}", indents.join(""))?;
                                 }
                                 li_p = true;
                                 first_li_p = false;
                             } else if let Some(Some(_n)) = lists.last() {
                                 if !first_li_p {
-                                    write!(block, "\n\n{}", indents.join(""))?;
+                                    if !block.ends_with("\n\n") {
+                                        writeln!(block, "\n")?;
+                                    }
+                                    write!(block, "{}", indents.join(""))?;
                                 }
                                 li_p = true;
                                 first_li_p = false;
@@ -231,15 +236,16 @@ impl Stylin {
                         }
                         lists.push(t);
                         indents.push(" ".repeat(if t.is_some() { 3 } else { 2 }));
-                        first_li = true;
                         first_li_p = true;
                         depth += 1;
                     }
                     pd::Tag::Item => {
-                        if !first_li {
+                        if !block.ends_with("\n\n") {
                             writeln!(block)?;
                         }
-                        first_li = false;
+                        if lists.len() > 1 {
+                            write!(block, "\n{}", indents[..(indents.len() - 1)].join(""))?;
+                        }
                         match lists.last().unwrap() {
                             Some(n) => {
                                 write!(block, "{n}. ")?;
@@ -329,13 +335,13 @@ impl Stylin {
                     }
                     pd::Tag::Image(..) => {
                         if li_p && self.figure.is_some() {
+                            let indent = indents.join("");
+                            if !block.ends_with(&format!("\n{indent}")) {
+                                write!(block, "{indent}")?;
+                            }
                             let style = self.figure.as_ref().unwrap();
-                            write!(
-                                block,
-                                ":::{{custom-style=\"{style}\"}}\n{}",
-                                indents.join(""),
-                            )?;
-                            end_div = true;
+                            write!(block, ":::{{custom-style=\"{style}\"}}\n{indent}")?;
+                            end_figure_div = true;
                         } else if let Some((style, false)) = paragraph {
                             let style = self.figure.as_ref().unwrap_or(style);
                             writeln!(block, ":::{{custom-style=\"{style}\"}}")?;
@@ -388,34 +394,36 @@ impl Stylin {
                             }
                             block = self.process_block(block, &mut blocks);
                         }
-                        if end_div {
-                            writeln!(block, "\n{}:::", indents.join(""))?;
-                            end_div = false;
+                        if end_figure_div {
+                            writeln!(block, "\n{}:::\n", indents.join(""))?;
+                            end_figure_div = false;
                         }
                         li_p = false;
                     }
                     pd::Tag::List(t) => {
                         depth -= 1;
                         if depth == 0 {
-                            if t.is_some() {
-                                if self.ordered_list.is_some() && !block.ends_with(":::\n") {
-                                    writeln!(block, ":::\n")?;
-                                } else {
-                                    writeln!(block)?;
-                                }
-                            } else if self.unordered_list.is_some() && !block.ends_with(":::\n") {
+                            if !block.ends_with("\n:::\n\n")
+                                && ((t.is_none() && self.unordered_list.is_some())
+                                    || (t.is_some() && self.ordered_list.is_some()))
+                            {
                                 writeln!(block, ":::\n")?;
-                            } else {
-                                writeln!(block)?;
                             }
                             block = self.process_block(block, &mut blocks);
+                        } else if !block.ends_with("\n\n") {
+                            writeln!(block)?;
                         }
                         let _ = lists.pop().unwrap();
                         let _ = indents.pop().unwrap();
                     }
                     pd::Tag::Item => {
                         depth -= 1;
-                        writeln!(block)?;
+                        if block.ends_with(":::") {
+                            block.insert(block.len() - 3, '\n');
+                            writeln!(block, "\n")?;
+                        } else if !block.ends_with("\n\n") {
+                            writeln!(block)?;
+                        }
                     }
                     pd::Tag::BlockQuote => {
                         depth -= 1;
