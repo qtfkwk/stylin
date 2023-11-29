@@ -9,6 +9,10 @@ Stylin provides a [library](#library) and a [command line utility](#cli).
 Stylin can be used in a pipeline with other tools, like [mkrs], [kapow],
 [pandoc], etc.
 
+[mkrs]: https://crates.io/crates/mkrs
+[kapow]: https://crates.io/crates/kapow
+[pandoc]: https://pandoc.org
+
 ![](pipeline.png)
 
 # CLI

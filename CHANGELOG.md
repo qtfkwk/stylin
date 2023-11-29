@@ -19,4 +19,5 @@
 * 0.5.1 (2023-11-27): Fix figure style in list items
 * 0.6.0 (2023-11-29): Fix nested lists; add pipeline example / documentation /
   diagram; update dependencies
+* 0.6.1 (2023-11-29): Fix readme
 

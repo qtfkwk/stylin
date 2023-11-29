@@ -9,6 +9,10 @@ Stylin provides a [library](#library) and a [command line utility](#cli).
 Stylin can be used in a pipeline with other tools, like [mkrs], [kapow],
 [pandoc], etc.
 
+[mkrs]: https://crates.io/crates/mkrs
+[kapow]: https://crates.io/crates/kapow
+[pandoc]: https://pandoc.org
+
 ![](pipeline.png)
 
 # CLI
@@ -33,7 +37,7 @@ Options:
 
 ```text
 $ stylin -V
-stylin 0.6.0
+stylin 0.6.1
 ```
 
 ## Example
@@ -465,6 +469,7 @@ See the [documentation](https://docs.rs/stylin) for usage and an example.
 * 0.5.1 (2023-11-27): Fix figure style in list items
 * 0.6.0 (2023-11-29): Fix nested lists; add pipeline example / documentation /
   diagram; update dependencies
+* 0.6.1 (2023-11-29): Fix readme
 
 # Notes
 
