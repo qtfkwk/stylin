@@ -46,11 +46,9 @@ mod tests;
 //--------------------------------------------------------------------------------------------------
 
 /**
-
 Primary interface
 
 See the module level documentation for an example.
-
 */
 #[derive(Debug, Default, Deserialize)]
 pub struct Stylin {
@@ -89,9 +87,7 @@ fn default_debug() -> bool {
 
 impl Stylin {
     /**
-
     Instantiate from a string slice
-
     */
     pub fn from(s: &str) -> Result<Stylin> {
         let r: Stylin = json5::from_str(s)?;
@@ -99,18 +95,14 @@ impl Stylin {
     }
 
     /**
-
     Instantiate from a file path
-
     */
     pub fn from_path(path: &Path) -> Result<Stylin> {
         Stylin::from(&std::fs::read_to_string(path)?)
     }
 
     /**
-
     Convert markdown to pandoc markdown
-
     */
     pub fn convert(&self, input: &str) -> Result<Vec<String>> {
         let mut blocks: Vec<String> = vec![];
@@ -240,11 +232,11 @@ impl Stylin {
                         depth += 1;
                     }
                     pd::Tag::Item => {
-                        if !block.ends_with("\n\n") {
+                        while !block.ends_with("\n\n") {
                             writeln!(block)?;
                         }
                         if lists.len() > 1 {
-                            write!(block, "\n{}", indents[..(indents.len() - 1)].join(""))?;
+                            write!(block, "{}", indents[..(indents.len() - 1)].join(""))?;
                         }
                         match lists.last().unwrap() {
                             Some(n) => {
@@ -314,6 +306,9 @@ impl Stylin {
                     if !disabled {
                         writeln!(block, "---\n")?;
                     }
+                }
+                pd::Event::TaskListMarker(_) => {
+                    write!(block, "{source} ")?;
                 }
 
                 // End tags
@@ -407,6 +402,9 @@ impl Stylin {
                                 && ((t.is_none() && self.unordered_list.is_some())
                                     || (t.is_some() && self.ordered_list.is_some()))
                             {
+                                if !block.ends_with("\n\n") {
+                                    writeln!(block)?;
+                                }
                                 writeln!(block, ":::\n")?;
                             }
                             block = self.process_block(block, &mut blocks);
@@ -514,11 +512,9 @@ impl Stylin {
     }
 
     /**
-
     Perform postprocessing on the block content then add it to `blocks`
 
     * Resolve "double styles" (`strong_emphasis`, `strong_code`)
-
     */
     fn process_block(&self, mut block: String, blocks: &mut Vec<String>) -> String {
         for (outer, inner, double) in [
@@ -539,9 +535,7 @@ impl Stylin {
 //--------------------------------------------------------------------------------------------------
 
 /**
-
 Replace "double style" spans with a single style
-
 */
 fn resolve_double_style(
     outer: &Option<String>,

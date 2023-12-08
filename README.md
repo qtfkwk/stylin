@@ -37,7 +37,7 @@ Options:
 
 ```text
 $ stylin -V
-stylin 0.6.1
+stylin 0.6.2
 ```
 
 ## Example
@@ -206,6 +206,12 @@ A | B
 1 | 2<br>3
 
 This code span has a backslash: `Code span with a \ backslash`.
+
+* [ ] Milk
+    * [ ] Fat free
+    * [ ] Whole
+* [ ] Eggs
+* [ ] Bananas
 
 ~~~
 
@@ -442,6 +448,20 @@ A | B
 This code span has a backslash: [Code span with a \\ backslash]{custom-style="Custom Code Style Name"}.
 :::
 
+:::{custom-style="Custom Unordered List Style Name"}
+
+* [ ] Milk
+
+  * [ ] Fat free
+
+  * [ ] Whole
+
+* [ ] Eggs
+
+* [ ] Bananas
+
+:::
+
 ~~~
 
 # Library
@@ -451,8 +471,8 @@ See the [documentation](https://docs.rs/stylin) for usage and an example.
 # Changelog
 
 * 0.1.0 (2023-11-16): Initial release
-* 0.1.1 (2023-11-16): Remove null configuration file; fix bad json syntax
-  highlighting on readme
+    * 0.1.1 (2023-11-16): Remove null configuration file; fix bad json syntax
+      highlighting on readme
 * 0.2.0 (2023-11-17): Add doctest; add `emphasis_strong` double style; add
   more strong/emphasis examples to `input.md`; fix issue with strong code double
   style; improve the double style algorithm; fix changelog; improve readme
@@ -460,16 +480,17 @@ See the [documentation](https://docs.rs/stylin) for usage and an example.
   images; remove convert smart quotes feature
 * 0.4.0 (2023-11-18): Fix image alt text; add links; fix comments; add unit
   tests
-* 0.4.1 (2023-11-20): Fix image/link depth issue
-* 0.4.2 (2023-11-20): Fix image/link and/or other content in table or blockquote
-  issue; fix image/link depth tests
-* 0.4.3 (2023-11-20): Add note #5 to avoid using a single style for blocks and
-  spans; properly handle backslashes in styled code spans
+    * 0.4.1 (2023-11-20): Fix image/link depth issue
+    * 0.4.2 (2023-11-20): Fix image/link and/or other content in table or blockquote
+      issue; fix image/link depth tests
+    * 0.4.3 (2023-11-20): Add note #5 to avoid using a single style for blocks and
+      spans; properly handle backslashes in styled code spans
 * 0.5.0 (2023-11-27): Add `figure` style; update dependencies
-* 0.5.1 (2023-11-27): Fix figure style in list items
+    * 0.5.1 (2023-11-27): Fix figure style in list items
 * 0.6.0 (2023-11-29): Fix nested lists; add pipeline example / documentation /
   diagram; update dependencies
-* 0.6.1 (2023-11-29): Fix readme
+    * 0.6.1 (2023-11-29): Fix readme
+    * 0.6.2 (2023-12-08): Fix task list marker issue; update dependencies
 
 # Notes
 

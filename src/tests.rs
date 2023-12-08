@@ -746,3 +746,41 @@ This code span has a backslash: \
         ],
     );
 }
+
+#[test]
+fn task_list() {
+    assert_eq!(
+        STYLIN
+            .convert(
+                "\
+* [ ] Milk
+    * [ ] Fat free
+    * [ ] Whole
+* [ ] Eggs
+* [ ] Bananas
+
+\
+                ",
+            )
+            .unwrap(),
+        vec![
+            "\
+:::{custom-style=\"Custom Unordered List Style Name\"}
+
+* [ ] Milk
+
+  * [ ] Fat free
+
+  * [ ] Whole
+
+* [ ] Eggs
+
+* [ ] Bananas
+
+:::
+
+\
+            ",
+        ],
+    );
+}

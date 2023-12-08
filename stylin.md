@@ -222,3 +222,17 @@ A | B
 This code span has a backslash: [Code span with a \\ backslash]{custom-style="Custom Code Style Name"}.
 :::
 
+:::{custom-style="Custom Unordered List Style Name"}
+
+* [ ] Milk
+
+  * [ ] Fat free
+
+  * [ ] Whole
+
+* [ ] Eggs
+
+* [ ] Bananas
+
+:::
+

@@ -130,3 +130,9 @@ A | B
 
 This code span has a backslash: `Code span with a \ backslash`.
 
+* [ ] Milk
+    * [ ] Fat free
+    * [ ] Whole
+* [ ] Eggs
+* [ ] Bananas
+
