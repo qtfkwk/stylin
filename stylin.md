@@ -239,3 +239,15 @@ This code span has a backslash: [Code span with a \\ backslash]{custom-style="Cu
 ```
 # Comment
 ```
+:::{custom-style="Figure Caption Style Name"}
+Figure: Figure Caption
+:::
+
+:::{custom-style="Table Caption Style Name"}
+Table: Table Caption
+:::
+
+:::{custom-style="Listing Caption Style Name"}
+Listing: Listing Caption
+:::
+

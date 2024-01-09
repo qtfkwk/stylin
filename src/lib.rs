@@ -75,6 +75,9 @@ pub struct Stylin {
     fenced_code_block: Option<String>,
     indented_code_block: Option<String>,
     figure: Option<String>,
+    figure_caption: Option<String>,
+    table_caption: Option<String>,
+    listing_caption: Option<String>,
 
     // Other
     #[serde(default = "default_debug")]
@@ -292,6 +295,27 @@ impl Stylin {
                                 if source.starts_with(":::") {
                                     paragraph = Some((style, true));
                                 } else {
+                                    let style = if source.starts_with("Figure:") {
+                                        if let Some(caption_style) = &self.figure_caption {
+                                            caption_style
+                                        } else {
+                                            style
+                                        }
+                                    } else if source.starts_with("Table:") {
+                                        if let Some(caption_style) = &self.table_caption {
+                                            caption_style
+                                        } else {
+                                            style
+                                        }
+                                    } else if source.starts_with("Listing:") {
+                                        if let Some(caption_style) = &self.listing_caption {
+                                            caption_style
+                                        } else {
+                                            style
+                                        }
+                                    } else {
+                                        style
+                                    };
                                     writeln!(block, ":::{{custom-style=\"{style}\"}}")?;
                                     paragraph = None;
                                 }

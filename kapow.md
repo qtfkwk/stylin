@@ -140,3 +140,9 @@ This code span has a backslash: `Code span with a \ backslash`.
 # Comment
 ```
 
+Figure: Figure Caption
+
+Table: Table Caption
+
+Listing: Listing Caption
+

@@ -22,4 +22,7 @@
   fenced_code_block: "Custom Fenced Code Block Style Name",
   indented_code_block: "Custom Indented Code Block Style Name",
   figure: "Custom Figure Style Name",
+  figure_caption: "Figure Caption Style Name",
+  table_caption: "Table Caption Style Name",
+  listing_caption: "Listing Caption Style Name"
 }

@@ -37,7 +37,7 @@ Options:
 
 ```text
 $ stylin -V
-stylin 0.7.0
+stylin 0.8.0
 ```
 
 ## Example
@@ -69,6 +69,9 @@ Given a configuration file, [`stylin.json`](stylin.json):
   fenced_code_block: "Custom Fenced Code Block Style Name",
   indented_code_block: "Custom Indented Code Block Style Name",
   figure: "Custom Figure Style Name",
+  figure_caption: "Figure Caption Style Name",
+  table_caption: "Table Caption Style Name",
+  listing_caption: "Listing Caption Style Name"
 }
 ~~~
 
@@ -216,6 +219,12 @@ This code span has a backslash: `Code span with a \ backslash`.
 ```[ignore]
 # Comment
 ```
+
+Figure: Figure Caption
+
+Table: Table Caption
+
+Listing: Listing Caption
 
 ~~~
 
@@ -466,8 +475,19 @@ This code span has a backslash: [Code span with a \\ backslash]{custom-style="Cu
 
 :::
 
-:::{custom-style="Custom Fenced Code Block Style Name"}
+```
 # Comment
+```
+:::{custom-style="Figure Caption Style Name"}
+Figure: Figure Caption
+:::
+
+:::{custom-style="Table Caption Style Name"}
+Table: Table Caption
+:::
+
+:::{custom-style="Listing Caption Style Name"}
+Listing: Listing Caption
 :::
 
 ~~~
@@ -500,7 +520,8 @@ See the [documentation](https://docs.rs/stylin) for usage and an example.
     * 0.6.1 (2023-11-29): Fix readme
     * 0.6.2 (2023-12-08): Fix task list marker issue; update dependencies
 * 0.7.0 (2024-01-09): Add an `[ignore]` info string tag to make stylin ignore
-  the fenced code block
+  the fenced code block; update dependencies
+* 0.8.0 (2024-01-09): Add caption styles
 
 # Notes
 
