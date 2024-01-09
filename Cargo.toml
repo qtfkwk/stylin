@@ -1,17 +1,17 @@
 [package]
 name = "stylin"
-version = "0.6.2"
+version = "0.7.0"
 edition = "2021"
 description = "Convert markdown to pandoc markdown with custom styles"
 repository = "https://github.com/qtfkwk/stylin"
 license = "MIT"
 
 [dependencies]
-anyhow = "1.0.75"
-clap = { version = "4.4.11", features = ["derive"] }
+anyhow = "1.0.79"
+clap = { version = "4.4.14", features = ["derive"] }
 json5 = "0.4.1"
 pulldown-cmark = "0.9.3"
-serde = { version = "1.0.193", features = ["derive"] }
+serde = { version = "1.0.195", features = ["derive"] }
 
 [dev-dependencies]
 lazy_static = "1.4.0"

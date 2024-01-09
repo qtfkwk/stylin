@@ -136,3 +136,7 @@ This code span has a backslash: `Code span with a \ backslash`.
 * [ ] Eggs
 * [ ] Bananas
 
+```[ignore]
+# Comment
+```
+

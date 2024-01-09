@@ -457,10 +457,13 @@ impl Stylin {
                         }
                         disabled = false;
                     }
-                    pd::Tag::CodeBlock(pd::CodeBlockKind::Fenced(_)) => {
+                    pd::Tag::CodeBlock(pd::CodeBlockKind::Fenced(info)) => {
                         depth -= 1;
                         if depth == 0 {
-                            if let Some(style) = &self.fenced_code_block {
+                            let info = info.to_string();
+                            if info == "[ignore]" {
+                                writeln!(block, "{}", source.replacen("[ignore]", "", 1))?;
+                            } else if let Some(style) = &self.fenced_code_block {
                                 let mut content = source.lines().collect::<Vec<_>>();
                                 content.remove(0);
                                 content.pop().unwrap();

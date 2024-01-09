@@ -37,7 +37,7 @@ Options:
 
 ```text
 $ stylin -V
-stylin 0.6.2
+stylin 0.7.0
 ```
 
 ## Example
@@ -212,6 +212,10 @@ This code span has a backslash: `Code span with a \ backslash`.
     * [ ] Whole
 * [ ] Eggs
 * [ ] Bananas
+
+```[ignore]
+# Comment
+```
 
 ~~~
 
@@ -462,6 +466,10 @@ This code span has a backslash: [Code span with a \\ backslash]{custom-style="Cu
 
 :::
 
+:::{custom-style="Custom Fenced Code Block Style Name"}
+# Comment
+:::
+
 ~~~
 
 # Library
@@ -491,6 +499,8 @@ See the [documentation](https://docs.rs/stylin) for usage and an example.
   diagram; update dependencies
     * 0.6.1 (2023-11-29): Fix readme
     * 0.6.2 (2023-12-08): Fix task list marker issue; update dependencies
+* 0.7.0 (2024-01-09): Add an `[ignore]` info string tag to make stylin ignore
+  the fenced code block
 
 # Notes
 

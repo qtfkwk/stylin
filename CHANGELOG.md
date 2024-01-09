@@ -21,4 +21,6 @@
   diagram; update dependencies
     * 0.6.1 (2023-11-29): Fix readme
     * 0.6.2 (2023-12-08): Fix task list marker issue; update dependencies
+* 0.7.0 (2024-01-09): Add an `[ignore]` info string tag to make stylin ignore
+  the fenced code block; update dependencies
 

@@ -236,3 +236,6 @@ This code span has a backslash: [Code span with a \\ backslash]{custom-style="Cu
 
 :::
 
+```
+# Comment
+```
