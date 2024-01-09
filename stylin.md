@@ -251,3 +251,7 @@ Table: Table Caption
 Listing: Listing Caption
 :::
 
+:::{custom-style="Figure Caption Style Name"}
+Figure 1.2: Caption for figure 1.2
+:::
+

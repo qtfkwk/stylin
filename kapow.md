@@ -146,3 +146,5 @@ Table: Table Caption
 
 Listing: Listing Caption
 
+Figure 1.2: Caption for figure 1.2
+

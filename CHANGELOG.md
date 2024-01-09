@@ -24,4 +24,5 @@
 * 0.7.0 (2024-01-09): Add an `[ignore]` info string tag to make stylin ignore
   the fenced code block; update dependencies
 * 0.8.0 (2024-01-09): Add caption styles
+    * 0.8.1 (2024-01-09): Allow custom numbering
 

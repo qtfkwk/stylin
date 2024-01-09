@@ -33,7 +33,9 @@ This is a paragraph.
 //--------------------------------------------------------------------------------------------------
 
 use anyhow::Result;
+use lazy_static::lazy_static;
 use pulldown_cmark as pd;
+use regex::Regex;
 use serde::Deserialize;
 use std::fmt::Write;
 use std::path::Path;
@@ -42,6 +44,14 @@ use std::path::Path;
 
 #[cfg(test)]
 mod tests;
+
+//--------------------------------------------------------------------------------------------------
+
+lazy_static! {
+    static ref FIGURE_CAPTION: Regex = Regex::new(r#"^Figure [0-9\.]+:"#).unwrap();
+    static ref TABLE_CAPTION: Regex = Regex::new(r#"^Table [0-9\.]+:"#).unwrap();
+    static ref LISTING_CAPTION: Regex = Regex::new(r#"^Listing [0-9\.]+:"#).unwrap();
+}
 
 //--------------------------------------------------------------------------------------------------
 
@@ -295,19 +305,25 @@ impl Stylin {
                                 if source.starts_with(":::") {
                                     paragraph = Some((style, true));
                                 } else {
-                                    let style = if source.starts_with("Figure:") {
+                                    let style = if source.starts_with("Figure:")
+                                        || FIGURE_CAPTION.is_match(source)
+                                    {
                                         if let Some(caption_style) = &self.figure_caption {
                                             caption_style
                                         } else {
                                             style
                                         }
-                                    } else if source.starts_with("Table:") {
+                                    } else if source.starts_with("Table:")
+                                        || TABLE_CAPTION.is_match(source)
+                                    {
                                         if let Some(caption_style) = &self.table_caption {
                                             caption_style
                                         } else {
                                             style
                                         }
-                                    } else if source.starts_with("Listing:") {
+                                    } else if source.starts_with("Listing:")
+                                        || LISTING_CAPTION.is_match(source)
+                                    {
                                         if let Some(caption_style) = &self.listing_caption {
                                             caption_style
                                         } else {

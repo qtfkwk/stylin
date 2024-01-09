@@ -37,7 +37,7 @@ Options:
 
 ```text
 $ stylin -V
-stylin 0.8.0
+stylin 0.8.1
 ```
 
 ## Example
@@ -225,6 +225,8 @@ Figure: Figure Caption
 Table: Table Caption
 
 Listing: Listing Caption
+
+Figure 1.2: Caption for figure 1.2
 
 ~~~
 
@@ -490,6 +492,10 @@ Table: Table Caption
 Listing: Listing Caption
 :::
 
+:::{custom-style="Figure Caption Style Name"}
+Figure 1.2: Caption for figure 1.2
+:::
+
 ~~~
 
 # Library
@@ -522,6 +528,7 @@ See the [documentation](https://docs.rs/stylin) for usage and an example.
 * 0.7.0 (2024-01-09): Add an `[ignore]` info string tag to make stylin ignore
   the fenced code block; update dependencies
 * 0.8.0 (2024-01-09): Add caption styles
+    * 0.8.1 (2024-01-09): Allow custom numbering
 
 # Notes
 
