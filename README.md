@@ -37,7 +37,7 @@ Options:
 
 ```text
 $ stylin -V
-stylin 0.8.1
+stylin 0.9.0
 ```
 
 ## Example
@@ -529,6 +529,7 @@ See the [documentation](https://docs.rs/stylin) for usage and an example.
   the fenced code block; update dependencies
 * 0.8.0 (2024-01-09): Add caption styles
     * 0.8.1 (2024-01-09): Allow custom numbering
+* 0.9.0 (2024-07-31): Fix makefile; update dependencies
 
 # Notes
 

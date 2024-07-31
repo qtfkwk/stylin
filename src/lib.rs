@@ -131,6 +131,7 @@ impl Stylin {
         let mut block = String::new();
         let mut paragraph = None;
         let mut img_link_depth = 0;
+        let mut info = None;
 
         for (event, range) in pd::Parser::new_ext(input, pd::Options::all()).into_offset_iter() {
             let source = &input[range.clone()];
@@ -161,12 +162,12 @@ impl Stylin {
                             write!(block, "**")?;
                         }
                     }
-                    pd::Tag::Image(..) | pd::Tag::Link(..) => {
+                    pd::Tag::Image { .. } | pd::Tag::Link { .. } => {
                         img_link_depth += 1;
                     }
 
                     // Blocks
-                    pd::Tag::Heading(level, ..) => {
+                    pd::Tag::Heading { level, .. } => {
                         let mut done = false;
                         if depth == 0 {
                             if let Some(style) = match level {
@@ -262,7 +263,14 @@ impl Stylin {
                         first_li_p = true;
                         depth += 1;
                     }
-                    pd::Tag::BlockQuote | pd::Tag::Table(_) | pd::Tag::CodeBlock(_) => {
+                    pd::Tag::CodeBlock(kind) => {
+                        if let pd::CodeBlockKind::Fenced(s) = kind {
+                            info = Some(s.to_string())
+                        }
+                        disabled = true;
+                        depth += 1;
+                    }
+                    pd::Tag::BlockQuote(_) | pd::Tag::Table(_) => {
                         disabled = true;
                         depth += 1;
                     }
@@ -354,21 +362,21 @@ impl Stylin {
                 // End tags
                 pd::Event::End(tag) => match tag {
                     // Spans
-                    pd::Tag::Emphasis => {
+                    pd::TagEnd::Emphasis => {
                         if let Some(style) = &self.emphasis {
                             write!(block, "]{{custom-style=\"{style}\"}}")?;
                         } else {
                             write!(block, "*")?;
                         }
                     }
-                    pd::Tag::Strong => {
+                    pd::TagEnd::Strong => {
                         if let Some(style) = &self.strong {
                             write!(block, "]{{custom-style=\"{style}\"}}")?;
                         } else {
                             write!(block, "**")?;
                         }
                     }
-                    pd::Tag::Image(..) => {
+                    pd::TagEnd::Image => {
                         if li_p && self.figure.is_some() {
                             let indent = indents.join("");
                             if !block.ends_with(&format!("\n{indent}")) {
@@ -387,7 +395,7 @@ impl Stylin {
                             write!(block, "{source}")?;
                         }
                     }
-                    pd::Tag::Link(..) => {
+                    pd::TagEnd::Link => {
                         if let Some((style, false)) = paragraph {
                             writeln!(block, ":::{{custom-style=\"{style}\"}}")?;
                             paragraph = Some((style, true));
@@ -399,7 +407,7 @@ impl Stylin {
                     }
 
                     // Blocks
-                    pd::Tag::Heading(level, ..) => {
+                    pd::TagEnd::Heading(level, ..) => {
                         depth -= 1;
                         if depth == 0 {
                             if match level {
@@ -419,7 +427,7 @@ impl Stylin {
                             block = self.process_block(block, &mut blocks);
                         }
                     }
-                    pd::Tag::Paragraph => {
+                    pd::TagEnd::Paragraph => {
                         depth -= 1;
                         if !disabled && lists.is_empty() && depth == 0 {
                             if self.paragraph.is_some() && !block.ends_with(":::") {
@@ -435,12 +443,12 @@ impl Stylin {
                         }
                         li_p = false;
                     }
-                    pd::Tag::List(t) => {
+                    pd::TagEnd::List(t) => {
                         depth -= 1;
                         if depth == 0 {
                             if !block.ends_with("\n:::\n\n")
-                                && ((t.is_none() && self.unordered_list.is_some())
-                                    || (t.is_some() && self.ordered_list.is_some()))
+                                && ((!t && self.unordered_list.is_some())
+                                    || (t && self.ordered_list.is_some()))
                             {
                                 if !block.ends_with("\n\n") {
                                     writeln!(block)?;
@@ -454,7 +462,7 @@ impl Stylin {
                         let _ = lists.pop().unwrap();
                         let _ = indents.pop().unwrap();
                     }
-                    pd::Tag::Item => {
+                    pd::TagEnd::Item => {
                         depth -= 1;
                         if block.ends_with(":::") {
                             block.insert(block.len() - 3, '\n');
@@ -463,7 +471,7 @@ impl Stylin {
                             writeln!(block)?;
                         }
                     }
-                    pd::Tag::BlockQuote => {
+                    pd::TagEnd::BlockQuote => {
                         depth -= 1;
                         if depth == 0 {
                             if let Some(style) = &self.blockquote {
@@ -485,7 +493,7 @@ impl Stylin {
                         }
                         disabled = false;
                     }
-                    pd::Tag::Table(_) => {
+                    pd::TagEnd::Table => {
                         depth -= 1;
                         if depth == 0 {
                             if let Some(style) = &self.table {
@@ -497,47 +505,43 @@ impl Stylin {
                         }
                         disabled = false;
                     }
-                    pd::Tag::CodeBlock(pd::CodeBlockKind::Fenced(info)) => {
+                    pd::TagEnd::CodeBlock => {
                         depth -= 1;
                         if depth == 0 {
-                            let info = info.to_string();
-                            if info == "[ignore]" {
-                                writeln!(block, "{}", source.replacen("[ignore]", "", 1))?;
-                            } else if let Some(style) = &self.fenced_code_block {
-                                let mut content = source.lines().collect::<Vec<_>>();
-                                content.remove(0);
-                                content.pop().unwrap();
-                                let content = content.join("\n\n");
-                                writeln!(
-                                    block,
-                                    ":::{{custom-style=\"{style}\"}}\n{content}\n:::\n"
-                                )?;
+                            if let Some(info) = info.take() {
+                                if info == "[ignore]" {
+                                    writeln!(block, "{}", source.replacen("[ignore]", "", 1))?;
+                                } else if let Some(style) = &self.fenced_code_block {
+                                    let mut content = source.lines().collect::<Vec<_>>();
+                                    content.remove(0);
+                                    content.pop().unwrap();
+                                    let content = content.join("\n\n");
+                                    writeln!(
+                                        block,
+                                        ":::{{custom-style=\"{style}\"}}\n{content}\n:::\n"
+                                    )?;
+                                } else {
+                                    writeln!(block, "{source}")?;
+                                }
+                                block = self.process_block(block, &mut blocks);
                             } else {
-                                writeln!(block, "{source}")?;
+                                if let Some(style) = &self.indented_code_block {
+                                    let content = source
+                                        .lines()
+                                        .map(|x| x.strip_prefix("    ").unwrap_or(x))
+                                        .collect::<Vec<_>>()
+                                        .join("\n\n");
+                                    writeln!(
+                                        block,
+                                        ":::{{custom-style=\"{style}\"}}\n{content}\n:::\n"
+                                    )?;
+                                } else {
+                                    writeln!(block, "    {source}")?;
+                                }
+                                block = self.process_block(block, &mut blocks);
                             }
-                            block = self.process_block(block, &mut blocks);
+                            disabled = false;
                         }
-                        disabled = false;
-                    }
-                    pd::Tag::CodeBlock(pd::CodeBlockKind::Indented) => {
-                        depth -= 1;
-                        if depth == 0 {
-                            if let Some(style) = &self.indented_code_block {
-                                let content = source
-                                    .lines()
-                                    .map(|x| x.strip_prefix("    ").unwrap_or(x))
-                                    .collect::<Vec<_>>()
-                                    .join("\n\n");
-                                writeln!(
-                                    block,
-                                    ":::{{custom-style=\"{style}\"}}\n{content}\n:::\n"
-                                )?;
-                            } else {
-                                writeln!(block, "    {source}")?;
-                            }
-                            block = self.process_block(block, &mut blocks);
-                        }
-                        disabled = false;
                     }
                     _ => {}
                 }, // end end tags
