@@ -37,7 +37,7 @@ Options:
 
 ```text
 $ stylin -V
-stylin 0.9.0
+stylin 0.9.1
 ```
 
 ## Example
@@ -71,7 +71,10 @@ Given a configuration file, [`stylin.json`](stylin.json):
   figure: "Custom Figure Style Name",
   figure_caption: "Figure Caption Style Name",
   table_caption: "Table Caption Style Name",
-  listing_caption: "Listing Caption Style Name"
+  listing_caption: "Listing Caption Style Name",
+
+  // Other
+  debug: false,
 }
 ~~~
 
@@ -530,6 +533,7 @@ See the [documentation](https://docs.rs/stylin) for usage and an example.
 * 0.8.0 (2024-01-09): Add caption styles
     * 0.8.1 (2024-01-09): Allow custom numbering
 * 0.9.0 (2024-07-31): Fix makefile; update dependencies
+    * 0.9.1 (2024-10-24): Update dependencies
 
 # Notes
 

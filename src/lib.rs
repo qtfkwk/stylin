@@ -133,7 +133,10 @@ impl Stylin {
         let mut img_link_depth = 0;
         let mut info = None;
 
-        for (event, range) in pd::Parser::new_ext(input, pd::Options::all()).into_offset_iter() {
+        let mut options = pd::Options::all();
+        options.remove(pd::Options::ENABLE_DEFINITION_LIST);
+
+        for (event, range) in pd::Parser::new_ext(input, options).into_offset_iter() {
             let source = &input[range.clone()];
 
             if self.debug {
@@ -471,7 +474,7 @@ impl Stylin {
                             writeln!(block)?;
                         }
                     }
-                    pd::TagEnd::BlockQuote => {
+                    pd::TagEnd::BlockQuote(_) => {
                         depth -= 1;
                         if depth == 0 {
                             if let Some(style) = &self.blockquote {

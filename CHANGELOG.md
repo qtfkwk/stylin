@@ -26,4 +26,5 @@
 * 0.8.0 (2024-01-09): Add caption styles
     * 0.8.1 (2024-01-09): Allow custom numbering
 * 0.9.0 (2024-07-31): Fix makefile; update dependencies
+    * 0.9.1 (2024-10-24): Update dependencies
 
