@@ -37,7 +37,7 @@ Options:
 
 ```text
 $ stylin -V
-stylin 0.9.1
+stylin 0.9.2
 ```
 
 ## Example
@@ -534,6 +534,7 @@ See the [documentation](https://docs.rs/stylin) for usage and an example.
     * 0.8.1 (2024-01-09): Allow custom numbering
 * 0.9.0 (2024-07-31): Fix makefile; update dependencies
     * 0.9.1 (2024-10-24): Update dependencies
+    * 0.9.2 (2024-12-04): Update dependencies; add commit target to makefile
 
 # Notes
 
