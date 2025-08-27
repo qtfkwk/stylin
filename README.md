@@ -37,7 +37,7 @@ Options:
 
 ```text
 $ stylin -V
-stylin 0.9.4
+stylin 0.10.0
 ```
 
 ## Example
@@ -537,6 +537,7 @@ See the [documentation](https://docs.rs/stylin) for usage and an example.
     * 0.9.2 (2024-12-04): Update dependencies; add commit target to makefile
     * 0.9.3 (2025-02-20): Update dependencies
     * 0.9.4 (2025-04-16): Update dependencies
+  * 0.10.0 (2025-08-27): Update dependencies; 2024 edition
 
 # Notes
 

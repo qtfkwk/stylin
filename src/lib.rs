@@ -172,8 +172,8 @@ impl Stylin {
                     // Blocks
                     pd::Tag::Heading { level, .. } => {
                         let mut done = false;
-                        if depth == 0 {
-                            if let Some(style) = match level {
+                        if depth == 0
+                            && let Some(style) = match level {
                                 pd::HeadingLevel::H1 => &self.heading_1,
                                 pd::HeadingLevel::H2 => &self.heading_2,
                                 pd::HeadingLevel::H3 => &self.heading_3,
@@ -184,7 +184,6 @@ impl Stylin {
                                 writeln!(block, ":::{{custom-style=\"{style}\"}}")?;
                                 done = true;
                             }
-                        }
                         if !done {
                             write!(
                                 block,
@@ -221,11 +220,10 @@ impl Stylin {
                                 }
                                 li_p = true;
                                 first_li_p = false;
-                            } else if depth == 0 {
-                                if let Some(style) = &self.paragraph {
+                            } else if depth == 0
+                                && let Some(style) = &self.paragraph {
                                     paragraph = Some((style, false));
                                 }
-                            }
                         }
                         depth += 1;
                     }
@@ -593,9 +591,9 @@ fn resolve_double_style(
     double: &Option<String>,
     block: &mut String,
 ) {
-    if let Some(style_outer) = outer {
-        if let Some(style_inner) = inner {
-            if let Some(style_double) = double {
+    if let Some(style_outer) = outer
+        && let Some(style_inner) = inner
+            && let Some(style_double) = double {
                 // All three styles must be defined...
 
                 let replace = format!(
@@ -616,6 +614,4 @@ fn resolve_double_style(
                     i = d - loss;
                 }
             }
-        }
-    }
 }
