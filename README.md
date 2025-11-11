@@ -37,7 +37,7 @@ Options:
 
 ```text
 $ stylin -V
-stylin 0.10.1
+stylin 0.10.2
 ```
 
 ## Example
@@ -539,6 +539,7 @@ See the [documentation](https://docs.rs/stylin) for usage and an example.
     * 0.9.4 (2025-04-16): Update dependencies
 * 0.10.0 (2025-08-27): Update dependencies; 2024 edition
     * 0.10.1 (2025-10-27): Update dependencies
+    * 0.10.2 (2025-11-11): Update dependencies; add [`clap-cargo`] `CLAP_STYLING`; cargo fmt
 
 # Notes
 

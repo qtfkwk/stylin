@@ -180,10 +180,11 @@ impl Stylin {
                                 pd::HeadingLevel::H4 => &self.heading_4,
                                 pd::HeadingLevel::H5 => &self.heading_5,
                                 pd::HeadingLevel::H6 => &self.heading_6,
-                            } {
-                                writeln!(block, ":::{{custom-style=\"{style}\"}}")?;
-                                done = true;
                             }
+                        {
+                            writeln!(block, ":::{{custom-style=\"{style}\"}}")?;
+                            done = true;
+                        }
                         if !done {
                             write!(
                                 block,
@@ -221,9 +222,10 @@ impl Stylin {
                                 li_p = true;
                                 first_li_p = false;
                             } else if depth == 0
-                                && let Some(style) = &self.paragraph {
-                                    paragraph = Some((style, false));
-                                }
+                                && let Some(style) = &self.paragraph
+                            {
+                                paragraph = Some((style, false));
+                            }
                         }
                         depth += 1;
                     }
@@ -593,25 +595,25 @@ fn resolve_double_style(
 ) {
     if let Some(style_outer) = outer
         && let Some(style_inner) = inner
-            && let Some(style_double) = double {
-                // All three styles must be defined...
+        && let Some(style_double) = double
+    {
+        // All three styles must be defined...
 
-                let replace = format!(
-                    "]{{custom-style=\"{style_inner}\"}}]{{custom-style=\"{style_outer}\"}}"
-                );
-                let with = format!("]{{custom-style=\"{style_double}\"}}");
-                let loss = replace.len() - with.len() + 1;
+        let replace =
+            format!("]{{custom-style=\"{style_inner}\"}}]{{custom-style=\"{style_outer}\"}}");
+        let with = format!("]{{custom-style=\"{style_double}\"}}");
+        let loss = replace.len() - with.len() + 1;
 
-                let mut i = 0;
-                while let Some(mut c) = block[i..].find(&replace) {
-                    c += i;
-                    let d = c + replace.len();
-                    if let Some(a) = block[..c].rfind("[[") {
-                        let b = a + 2;
-                        block.replace_range(c..d, &with);
-                        block.replace_range(a..b, "[");
-                    }
-                    i = d - loss;
-                }
+        let mut i = 0;
+        while let Some(mut c) = block[i..].find(&replace) {
+            c += i;
+            let d = c + replace.len();
+            if let Some(a) = block[..c].rfind("[[") {
+                let b = a + 2;
+                block.replace_range(c..d, &with);
+                block.replace_range(a..b, "[");
             }
+            i = d - loss;
+        }
+    }
 }

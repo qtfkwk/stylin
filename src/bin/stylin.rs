@@ -1,10 +1,16 @@
-use anyhow::Result;
-use clap::Parser;
-use std::path::PathBuf;
-use stylin::Stylin;
+use {
+    anyhow::Result, clap::Parser, clap_cargo::style::CLAP_STYLING, std::path::PathBuf,
+    stylin::Stylin,
+};
 
 #[derive(Parser)]
-#[command(about, version, arg_required_else_help = true)]
+#[command(
+    about,
+    version,
+    max_term_width = 80,
+    styles = CLAP_STYLING,
+    arg_required_else_help = true,
+)]
 struct Cli {
     /// Debug
     #[arg(short, hide = true)]
