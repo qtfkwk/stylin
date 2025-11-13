@@ -1,11 +1,8 @@
-use super::*;
-use lazy_static::lazy_static;
+use {super::*, std::sync::LazyLock};
 
 const CONFIG: &str = include_str!("../stylin.json");
 
-lazy_static! {
-    static ref STYLIN: Stylin = Stylin::from(CONFIG).unwrap();
-}
+static STYLIN: LazyLock<Stylin> = LazyLock::new(|| Stylin::from(CONFIG).unwrap());
 
 #[test]
 fn heading_1() {

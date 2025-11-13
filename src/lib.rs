@@ -31,29 +31,33 @@ This is a paragraph.
 */
 
 //--------------------------------------------------------------------------------------------------
+// Crates
 
-use anyhow::Result;
-use lazy_static::lazy_static;
-use pulldown_cmark as pd;
-use regex::Regex;
-use serde::Deserialize;
-use std::fmt::Write;
-use std::path::Path;
+use {
+    anyhow::Result,
+    pulldown_cmark as pd,
+    regex::Regex,
+    serde::Deserialize,
+    std::{fmt::Write, path::Path, sync::LazyLock},
+};
 
 //--------------------------------------------------------------------------------------------------
+// Modules
 
 #[cfg(test)]
 mod tests;
 
 //--------------------------------------------------------------------------------------------------
+// Statics
 
-lazy_static! {
-    static ref FIGURE_CAPTION: Regex = Regex::new(r#"^Figure [0-9\.]+:"#).unwrap();
-    static ref TABLE_CAPTION: Regex = Regex::new(r#"^Table [0-9\.]+:"#).unwrap();
-    static ref LISTING_CAPTION: Regex = Regex::new(r#"^Listing [0-9\.]+:"#).unwrap();
-}
+static FIGURE_CAPTION: LazyLock<Regex> =
+    LazyLock::new(|| Regex::new(r"^Figure [0-9\.]+:").unwrap());
+static LISTING_CAPTION: LazyLock<Regex> =
+    LazyLock::new(|| Regex::new(r"^Listing [0-9\.]+:").unwrap());
+static TABLE_CAPTION: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"^Table [0-9\.]+:").unwrap());
 
 //--------------------------------------------------------------------------------------------------
+// Structs
 
 /**
 Primary interface
@@ -101,6 +105,10 @@ fn default_debug() -> bool {
 impl Stylin {
     /**
     Instantiate from a string slice
+
+    # Errors
+
+    Returns an error if not able to parse the given `&str` as JSON5
     */
     pub fn from(s: &str) -> Result<Stylin> {
         let r: Stylin = json5::from_str(s)?;
@@ -109,6 +117,10 @@ impl Stylin {
 
     /**
     Instantiate from a file path
+
+    # Errors
+
+    Returns an error if not able to read the file at the given path to a string
     */
     pub fn from_path(path: &Path) -> Result<Stylin> {
         Stylin::from(&std::fs::read_to_string(path)?)
@@ -117,6 +129,11 @@ impl Stylin {
     /**
     Convert markdown to pandoc markdown
     */
+    #[allow(
+        clippy::missing_errors_doc,
+        clippy::missing_panics_doc,
+        clippy::too_many_lines
+    )]
     pub fn convert(&self, input: &str) -> Result<Vec<String>> {
         let mut blocks: Vec<String> = vec![];
 
@@ -268,7 +285,7 @@ impl Stylin {
                     }
                     pd::Tag::CodeBlock(kind) => {
                         if let pd::CodeBlockKind::Fenced(s) = kind {
-                            info = Some(s.to_string())
+                            info = Some(s.to_string());
                         }
                         disabled = true;
                         depth += 1;
@@ -572,7 +589,7 @@ impl Stylin {
             (&self.strong, &self.emphasis, &self.strong_emphasis),
             (&self.strong, &self.code, &self.strong_code),
         ] {
-            resolve_double_style(outer, inner, double, &mut block);
+            resolve_double_style(outer.as_ref(), inner.as_ref(), double.as_ref(), &mut block);
         }
         if self.debug {
             eprintln!("---\nblock = {block:?}");
@@ -583,14 +600,15 @@ impl Stylin {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Functions
 
 /**
 Replace "double style" spans with a single style
 */
 fn resolve_double_style(
-    outer: &Option<String>,
-    inner: &Option<String>,
-    double: &Option<String>,
+    outer: Option<&String>,
+    inner: Option<&String>,
+    double: Option<&String>,
     block: &mut String,
 ) {
     if let Some(style_outer) = outer
