@@ -397,12 +397,11 @@ impl Stylin {
                         }
                     }
                     pd::TagEnd::Image => {
-                        if li_p && self.figure.is_some() {
+                        if li_p && let Some(style) = self.figure.as_ref() {
                             let indent = indents.join("");
                             if !block.ends_with(&format!("\n{indent}")) {
                                 write!(block, "{indent}")?;
                             }
-                            let style = self.figure.as_ref().unwrap();
                             write!(block, ":::{{custom-style=\"{style}\"}}\n{indent}")?;
                             end_figure_div = true;
                         } else if let Some((style, false)) = paragraph {
